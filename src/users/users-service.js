@@ -27,4 +27,4 @@ const UsersService = {
         
 }
 
-module.exports = FoldersService 
+module.exports = UsersService 
