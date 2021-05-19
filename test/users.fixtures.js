@@ -18,5 +18,5 @@ function makeUsersArray() {
 }
 
 module.exports = {
-    makeSuppliesArray
+    makeUsersArray
 }
