@@ -16,9 +16,11 @@ describe('Users Endpoints', function() {
       
     after('disconnect from db', () => db.destroy())    
 
-    before('clean the table', () => db.raw('TRUNCATE my-diy-inventory_users, supplies RESTART IDENTITY CASCADE'))
+    before('clean the table', () => db('my-diy-inventory_users').truncate())
+    // before('clean the table', () => db.raw('TRUNCATE my-diy-inventory_users, supplies RESTART IDENTITY CASCADE'))
 
-    afterEach('cleanup',() => db.raw('TRUNCATE my-diy-inventory_users, supplies RESTART IDENTITY CASCADE'))
+    afterEach('cleanup',() => db('my-diy-inventory_users').truncate())
+    // afterEach('cleanup',() => db.raw('TRUNCATE my-diy-inventory_users, supplies RESTART IDENTITY CASCADE'))
 
     describe(`GET /api/users`, () => {
 
