@@ -6,9 +6,17 @@ function makeUsersArray() {
             email: 'elizabeth.biz.hight@gmail.com',
             username: 'biz_codes',
             password: 'Go4Admin!'
-
+        },
+        {
+            id: 2,
+            name: 'Demo user',
+            email: 'thisisafakeemail@gmail.com',
+            username: 'demo_user',
+            password: 'Go4Demo!'
         }
     ]
 }
 
-    ('Demo user', 'thisisafakeemail@gmail.com', 'demo_user', '@Go2Demo');
+module.exports = {
+    makeSuppliesArray
+}
