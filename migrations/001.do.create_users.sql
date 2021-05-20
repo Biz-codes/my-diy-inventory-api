@@ -5,7 +5,7 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 
-INSERT INTO users (name, email, username, password)
+INSERT INTO users (name, username, password)
 VALUES
-    ('Biz Hight', 'elizabeth.biz.hight@gmail.com', 'biz_codes', 'Go4Admin!'),
-    ('Demo user', 'thisisafakeemail@gmail.com', 'demo_user', 'Go4Demo!');
+    ('Biz Hight', 'elizabeth.biz.hight@gmail.com', 'Go4Admin!'),
+    ('Demo user', 'demo.email@gmail.com', 'Go4Demo!');
