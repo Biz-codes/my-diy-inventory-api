@@ -9,7 +9,6 @@ const jsonParser = express.json()
 const serializeUser = user => ({
     id: user.id,
     name: xss(user.name),
-    email: xss(user.email),
     username: xss(user.username),
     password: xss(user.password)
 })
