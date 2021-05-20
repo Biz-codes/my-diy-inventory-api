@@ -75,127 +75,68 @@ describe('Supplies Endpoints', function() {
         // })
     })
 
-    // describe(`GET /api/notes/:note_id`, () => {
 
-    //   context(`Given no notes`, () => {
-    //     it(`responds with 404`, () => {
-    //       const noteId = 123456
-    //       return supertest(app)
-    //         .get(`/api/notes/${noteId}`)
-    //         .expect(404, { error: { message: `Note doesn't exist` } })
-    //     })
-    //   })
-  
-    //   context('Given there are notes in the database', () => {
-    //     const testFolders = makeFoldersArray();
-    //     const testNotes = makeNotesArray()
-  
-    //     beforeEach('insert notes', () => {
-    //       return db
-    //         .into('noteful_folders')
-    //         .insert(testFolders)
-    //         .then(() => {
-    //           return db
-    //             .into('noteful_notes')
-    //             .insert(testNotes)
-    //         })
-    //     })
-  
-    //     it('responds with 200 and the specified note', () => {
-    //       const noteId = 2
-    //       const expectedNote = testNotes[noteId - 1]
-    //       return supertest(app)
-    //         .get(`/api/notes/${noteId}`)
-    //         .expect(200, expectedNote)
-    //     })
-    //   })
-  
-    //   // context(`Given an XSS attack article`, () => {
-    //   //   const { maliciousArticle, expectedArticle } = makeMaliciousArticle()
-  
-    //   //   beforeEach('insert malicious article', () => {
-    //   //     return db
-    //   //       .into('blogful_articles')
-    //   //       .insert([ maliciousArticle ])
-    //   //   })
-  
-    //   //   it('removes XSS attack content', () => {
-    //   //     return supertest(app)
-    //   //       .get(`/api/articles/${maliciousArticle.id}`)
-    //   //       .expect(200)
-    //   //       .expect(res => {
-    //   //         expect(res.body.title).to.eql(expectedArticle.title)
-    //   //         expect(res.body.content).to.eql(expectedArticle.content)
-    //   //       })
-    //   //   })
-    //   // })
-    // })
+    describe(`POST /api/supplies`, () => {
 
-    // describe(`POST /api/notes`, () => {
+        const testUsers = makeUsersArray();
+  
+        beforeEach('post supplies', () => {
+          return db
+            .into('users')
+            .insert(testUsers)
+        })
 
-    //   const testFolders = makeFoldersArray();
-    //     const testNotes = makeNotesArray()
-  
-    //     beforeEach('post notes', () => {
-    //       return db
-    //         .into('noteful_folders')
-    //         .insert(testFolders)
-    //         // .then(() => {
-    //         //   return db
-    //         //     .into('noteful_notes')
-    //         //     .insert(testNotes)
-    //         // })
-    //     })
-
-    //   it(`creates a note, responding with 201 and the new note`, function() {
-    //     this.retries(3)
-    //     const newNote = {
-    //         note_name: 'Test post',
-    //         content: 'Somewhere over the rainbow',
-    //         folder_id: 1
-    //     }
-    //     return supertest(app)
-    //       .post('/api/notes')
-    //       .send(newNote)
-    //       .expect(201) 
-    //       .expect(res => {
-    //         expect(res.body.note_name).to.eql(newNote.note_name)
-    //         expect(res.body.content).to.eql(newNote.content)
-    //         expect(res.body.folder_id).to.eql(newNote.folder_id)
-    //         expect(res.body).to.have.property('id')
-    //         expect(res.headers.location).to.eql(`/api/notes/${res.body.id}`)
-    //         const expected = new Date().toLocaleString()
-    //         const actual = new Date(res.body.date_modified).toLocaleString()
-    //         expect(actual).to.eql(expected)
-    //       })
-    //       .then(res =>
-    //         supertest(app)
-    //           .get(`/api/notes/${res.body.id}`)
-    //           .expect(res.body)
-    //       )
-    //   })
-  
-    //   const requiredFields = ['note_name', 'content', 'folder_id']
-  
-    //   requiredFields.forEach(field => {
-    //     const newNote = {
-    //       note_name: 'Test post',
-    //       content: 'Somewhere over the rainbow',
-    //       folder_id: 1
-    //     }
+        it(`creates a supply, responding with 201 and the new supply`, function() {
+            
+            const newSupply = {
+                supply_name: 'Test supply',
+                user_id: 1,
+                details: 'Test description',
+                quantity: 1
+            }
+            return supertest(app)
+                .post('/api/supplies')
+                .send(newSupply)
+                .expect(201) 
+                .expect(res => {
+                    expect(res.body.supply_name).to.eql(newSupply.supply_name)
+                    expect(res.body.user_id).to.eql(newSupply.user_id)
+                    expect(res.body.details).to.eql(newSupply.details)
+                    expect(res.body.quantity).to.eql(newSupply.quantity)
+                    expect(res.body).to.have.property('id')
+                    expect(res.headers.location).to.eql(`/api/supplies/${res.body.id}`)
+                })
+            .then(res =>
+                supertest(app)
+                .get(`/api/supplies/${res.body.id}`)
+                .expect(res.body)
+            )
+        })
     
-    //     it(`responds with 400 and an error message when the '${field}' is missing`, () => {
-    //       delete newNote[field]
-    
-    //       return supertest(app)
-    //         .post('/api/notes')
-    //         .send(newNote)
-    //         .expect(400, {
-    //           error: { message: `Missing '${field}' in request body` }
-    //         })
-    //     })
-    //   })
   
+      const requiredFields = ['supply_name', 'user_id', 'details', 'quantity']
+  
+      requiredFields.forEach(field => {
+        const newSupply = {
+            supply_name: 'Test supply',
+            user_id: 1,
+            details: 'Test description',
+            quantity: 1
+        }
+      
+    
+        it(`responds with 400 and an error message when the '${field}' is missing`, () => {
+          delete newSupply[field]
+    
+          return supertest(app)
+            .post('/api/supplies')
+            .send(newSupply)
+            .expect(400, {
+              error: { message: `Missing '${field}' in request body` }
+            })
+        })
+    })
+})
     //   // it('removes XSS attack content from response', () => {
     //   //   const { maliciousArticle, expectedArticle } = makeMaliciousArticle()
     //   //   return supertest(app)

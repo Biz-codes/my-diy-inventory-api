@@ -27,30 +27,28 @@ suppliesRouter
 
 
   
-//   .post(jsonParser, (req, res, next) => {
-//     const { note_name, content, folder_id, date_modified } = req.body
-//     const newNote = { note_name, content, folder_id }
+  .post(jsonParser, (req, res, next) => {
+    const { user_id, supply_name, details, quantity } = req.body
+    const newSupply = { user_id, supply_name, details, quantity }
 
-//     for (const [key, value] of Object.entries(newNote))
-//       if (value == null)
-//         return res.status(400).json({
-//           error: { message: `Missing '${key}' in request body` }
-//         })
+    for (const [key, value] of Object.entries(newSupply))
+      if (value == null)
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
 
-//     newNote.date_modified = date_modified;
-
-//     NotesService.insertNote(
-//       req.app.get('db'),
-//       newNote
-//     )
-//       .then(note => {
-//         res
-//           .status(201)
-//           .location(path.posix.join(req.originalUrl, `/${note.id}`))
-//           .json(serializeNote(note))
-//       })
-//       .catch(next)
-//   })
+    SuppliesService.insertSupply(
+      req.app.get('db'),
+      newSupply
+    )
+      .then(supply => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${supply.id}`))
+          .json(serializeSupply(supply))
+      })
+      .catch(next)
+  })
 
 // notesRouter
 //   .route('/:note_id')

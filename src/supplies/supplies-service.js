@@ -3,15 +3,15 @@ const SuppliesService = {
       return knex.select('*').from('supplies')
     },
   
-    // insertNote(knex, newNote) {
-    //   return knex
-    //     .insert(newNote)
-    //     .into('noteful_notes')
-    //     .returning('*')
-    //     .then(rows => {
-    //       return rows[0]
-    //     })
-    // },
+    insertSupply(knex, newSupply) {
+      return knex
+        .insert(newSupply)
+        .into('supplies')
+        .returning('*')
+        .then(rows => {
+          return rows[0]
+        })
+    },
 
     // getById(knex, id) {
     //   return knex
