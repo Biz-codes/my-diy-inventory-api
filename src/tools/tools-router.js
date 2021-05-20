@@ -25,4 +25,27 @@ toolsRouter
       .catch(next)
   })
 
+  .post(jsonParser, (req, res, next) => {
+    const { user_id, tool_name, details, quantity } = req.body
+    const newTool = { user_id, tool_name, details, quantity }
+
+    for (const [key, value] of Object.entries(newTool))
+      if (value == null)
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
+
+    ToolsService.insertTool(
+      req.app.get('db'),
+      newTool
+    )
+      .then(tool => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${tool.id}`))
+          .json(serializeTool(tool))
+      })
+      .catch(next)
+  })
+
   module.exports = toolsRouter

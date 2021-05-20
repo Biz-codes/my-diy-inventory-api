@@ -17,9 +17,9 @@ describe('Tools Endpoints', function() {
       
     after('disconnect from db', () => db.destroy())    
 
-    before('clean the table', () => db.raw('TRUNCATE users, supplies RESTART IDENTITY CASCADE'))
+    before('clean the table', () => db.raw('TRUNCATE users, tools RESTART IDENTITY CASCADE'))
 
-    afterEach('cleanup',() => db.raw('TRUNCATE users, supplies RESTART IDENTITY CASCADE'))
+    afterEach('cleanup',() => db.raw('TRUNCATE users, tools RESTART IDENTITY CASCADE'))
 
     describe(`GET /api/tools`, () => {
 
@@ -54,4 +54,67 @@ describe('Tools Endpoints', function() {
             })
         })
     })
+
+    describe(`POST /api/tools`, () => {
+
+      const testUsers = makeUsersArray();
+
+      beforeEach('post tools', () => {
+        return db
+          .into('users')
+          .insert(testUsers)
+      })
+
+      it(`creates a tool, responding with 201 and the new supply`, function() {
+          
+          const newTool = {
+              tool_name: 'Test tool',
+              user_id: 1,
+              details: 'Test description',
+              quantity: 1
+          }
+          return supertest(app)
+              .post('/api/tools')
+              .send(newTool)
+              .expect(201) 
+              .expect(res => {
+                  expect(res.body.tool_name).to.eql(newTool.tool_name)
+                  expect(res.body.user_id).to.eql(newTool.user_id)
+                  expect(res.body.details).to.eql(newTool.details)
+                  expect(res.body.quantity).to.eql(newTool.quantity)
+                  expect(res.body).to.have.property('id')
+                  expect(res.headers.location).to.eql(`/api/tools/${res.body.id}`)
+              })
+          .then(res =>
+              supertest(app)
+              .get(`/api/tools/${res.body.id}`)
+              .expect(res.body)
+          )
+      })
+  
+
+      const requiredFields = ['tool_name', 'user_id', 'details', 'quantity']
+
+      requiredFields.forEach(field => {
+        const newTool = {
+            tool_name: 'Test tool',
+            user_id: 1,
+            details: 'Test description',
+            quantity: 1
+        }
+    
+  
+      it(`responds with 400 and an error message when the '${field}' is missing`, () => {
+        delete newTool[field]
+  
+        return supertest(app)
+          .post('/api/tools')
+          .send(newTool)
+          .expect(400, {
+            error: { message: `Missing '${field}' in request body` }
+          })
+      })
+  })
+
+})
 })
