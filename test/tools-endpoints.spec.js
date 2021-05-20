@@ -1,120 +1,145 @@
-const { expect } = require('chai')
-const knex = require('knex')
-const app = require('../src/app')
-const { makeUsersArray } = require('./users.fixtures')
-const { makeToolsArray } = require('./tools.fixtures')
+const { expect } = require("chai");
+const knex = require("knex");
+const app = require("../src/app");
+const { makeUsersArray } = require("./users.fixtures");
+const { makeToolsArray } = require("./tools.fixtures");
 
-describe('Tools Endpoints', function() {
-    let db
+describe("Tools Endpoints", function () {
+  let db;
 
-    before('make knex instance', () => {
-        db = knex({
-          client: 'pg',
-          connection: process.env.TEST_DATABASE_URL,
-        })
-        app.set('db', db)
-    })
-      
-    after('disconnect from db', () => db.destroy())    
+  before("make knex instance", () => {
+    db = knex({
+      client: "pg",
+      connection: process.env.TEST_DATABASE_URL,
+    });
+    app.set("db", db);
+  });
 
-    before('clean the table', () => db.raw('TRUNCATE users, tools RESTART IDENTITY CASCADE'))
+  after("disconnect from db", () => db.destroy());
 
-    afterEach('cleanup',() => db.raw('TRUNCATE users, tools RESTART IDENTITY CASCADE'))
+  before("clean the table", () =>
+    db.raw("TRUNCATE users, tools RESTART IDENTITY CASCADE")
+  );
 
-    describe(`GET /api/tools`, () => {
+  afterEach("cleanup", () =>
+    db.raw("TRUNCATE users, tools RESTART IDENTITY CASCADE")
+  );
 
-        context(`Given no tools`, () => {
-            it(`responds with 200 and an empty list`, () => {
-              return supertest(app)
-                .get('/api/supplies')
-                .expect(200, [])
-            })
-        })
+  describe(`GET /api/tools`, () => {
+    context(`Given no tools`, () => {
+      it(`responds with 200 and an empty list`, () => {
+        return supertest(app).get("/api/supplies").expect(200, []);
+      });
+    });
 
-        context('Given there are tools in the database', () => {
-            const testUsers = makeUsersArray();
-            const testTools = makeToolsArray()
-      
-            beforeEach('insert tools', () => {
-              return db
-              .into('users')
-                .insert(testUsers)
-                .then(() => {
-                  return db
-                    .into('tools')
-                    .insert(testTools)
-                })
-                
-            })
-      
-            it('responds with 200 and all of the tools', () => {
-              return supertest(app)
-                .get('/api/tools')
-                .expect(200, testTools)
-            })
-        })
-    })
-
-    describe(`POST /api/tools`, () => {
-
+    context("Given there are tools in the database", () => {
       const testUsers = makeUsersArray();
+      const testTools = makeToolsArray();
 
-      beforeEach('post tools', () => {
+      beforeEach("insert tools", () => {
         return db
-          .into('users')
+          .into("users")
           .insert(testUsers)
-      })
+          .then(() => {
+            return db.into("tools").insert(testTools);
+          });
+      });
 
-      it(`creates a tool, responding with 201 and the new tool`, function() {
-          
-          const newTool = {
-              tool_name: 'Test tool',
-              user_id: 1,
-              details: 'Test description',
-              quantity: 1
-          }
-          return supertest(app)
-              .post('/api/tools')
-              .send(newTool)
-              .expect(201) 
-              .expect(res => {
-                  expect(res.body.tool_name).to.eql(newTool.tool_name)
-                  expect(res.body.user_id).to.eql(newTool.user_id)
-                  expect(res.body.details).to.eql(newTool.details)
-                  expect(res.body.quantity).to.eql(newTool.quantity)
-                  expect(res.body).to.have.property('id')
-                  expect(res.headers.location).to.eql(`/api/tools/${res.body.id}`)
-              })
-          .then(res =>
-              supertest(app)
-              .get(`/api/tools/${res.body.id}`)
-              .expect(res.body)
-          )
-      })
-  
+      it("responds with 200 and all of the tools", () => {
+        return supertest(app).get("/api/tools").expect(200, testTools);
+      });
+    });
+  });
 
-      const requiredFields = ['tool_name', 'user_id', 'details', 'quantity']
+  describe(`POST /api/tools`, () => {
+    const testUsers = makeUsersArray();
 
-      requiredFields.forEach(field => {
-        const newTool = {
-            tool_name: 'Test tool',
-            user_id: 1,
-            details: 'Test description',
-            quantity: 1
-        }
-    
-  
+    beforeEach("post tools", () => {
+      return db.into("users").insert(testUsers);
+    });
+
+    it(`creates a tool, responding with 201 and the new tool`, function () {
+      const newTool = {
+        tool_name: "Test tool",
+        user_id: 1,
+        details: "Test description",
+        quantity: 1,
+      };
+      return supertest(app)
+        .post("/api/tools")
+        .send(newTool)
+        .expect(201)
+        .expect((res) => {
+          expect(res.body.tool_name).to.eql(newTool.tool_name);
+          expect(res.body.user_id).to.eql(newTool.user_id);
+          expect(res.body.details).to.eql(newTool.details);
+          expect(res.body.quantity).to.eql(newTool.quantity);
+          expect(res.body).to.have.property("id");
+          expect(res.headers.location).to.eql(`/api/tools/${res.body.id}`);
+        })
+        .then((res) =>
+          supertest(app).get(`/api/tools/${res.body.id}`).expect(res.body)
+        );
+    });
+
+    const requiredFields = ["tool_name", "user_id", "details", "quantity"];
+
+    requiredFields.forEach((field) => {
+      const newTool = {
+        tool_name: "Test tool",
+        user_id: 1,
+        details: "Test description",
+        quantity: 1,
+      };
+
       it(`responds with 400 and an error message when the '${field}' is missing`, () => {
-        delete newTool[field]
-  
+        delete newTool[field];
+
         return supertest(app)
-          .post('/api/tools')
+          .post("/api/tools")
           .send(newTool)
           .expect(400, {
-            error: { message: `Missing '${field}' in request body` }
-          })
-      })
-  })
+            error: { message: `Missing '${field}' in request body` },
+          });
+      });
+    });
+  });
 
-})
-})
+  describe(`DELETE /api/tools/:tool_id`, () => {
+    context(`Given no tools`, () => {
+      it(`responds with 404`, () => {
+        const toolId = 123456;
+        return supertest(app)
+          .delete(`/api/tools/${toolId}`)
+          .expect(404, { error: { message: `Tool doesn't exist` } });
+      });
+    });
+
+    context("Given there are tools in the database", () => {
+      const testUsers = makeUsersArray();
+      const testTools = makeToolsArray();
+
+      beforeEach("insert tools", () => {
+        return db
+          .into("users")
+          .insert(testUsers)
+          .then(() => {
+            return db.into("tools").insert(testTools);
+          });
+      });
+
+      it("responds with 204 and removes the tool", () => {
+        const idToRemove = 2;
+        const expectedTool = testTools.filter(
+          (tool) => tool.id !== idToRemove
+        );
+        return supertest(app)
+          .delete(`/api/tools/${idToRemove}`)
+          .expect(204)
+          .then((res) =>
+            supertest(app).get(`/api/tools`).expect(expectedTool)
+          );
+      });
+    });
+  });
+});

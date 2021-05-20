@@ -48,4 +48,36 @@ toolsRouter
       .catch(next)
   })
 
+  toolsRouter
+  .route('/:tool_id')
+  .all((req, res, next) => {
+    ToolsService.getById(
+      req.app.get('db'),
+      req.params.tool_id
+    )
+      .then(tool => {
+        if (!tool) {
+          return res.status(404).json({
+            error: { message: `Tool doesn't exist` }
+          })
+        }
+        res.tool = tool
+        next()
+      })
+      .catch(next)
+  })
+  .get((req, res, next) => {
+    res.json(serializeTool(res.tool))
+  })
+  .delete((req, res, next) => {
+    ToolsService.deleteTool(
+      req.app.get('db'),
+      req.params.tool_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
   module.exports = toolsRouter
