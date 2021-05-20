@@ -50,37 +50,37 @@ suppliesRouter
       .catch(next)
   })
 
-// notesRouter
-//   .route('/:note_id')
-//   .all((req, res, next) => {
-//     NotesService.getById(
-//       req.app.get('db'),
-//       req.params.note_id
-//     )
-//       .then(note => {
-//         if (!note) {
-//           return res.status(404).json({
-//             error: { message: `Note doesn't exist` }
-//           })
-//         }
-//         res.note = note
-//         next()
-//       })
-//       .catch(next)
-//   })
-//   .get((req, res, next) => {
-//     res.json(serializeNote(res.note))
-//   })
-//   .delete((req, res, next) => {
-//     NotesService.deleteNote(
-//       req.app.get('db'),
-//       req.params.note_id
-//     )
-//       .then(numRowsAffected => {
-//         res.status(204).end()
-//       })
-//       .catch(next)
-//   })
+suppliesRouter
+  .route('/:supply_id')
+  .all((req, res, next) => {
+    SuppliesService.getById(
+      req.app.get('db'),
+      req.params.supply_id
+    )
+      .then(supply => {
+        if (!supply) {
+          return res.status(404).json({
+            error: { message: `Supply doesn't exist` }
+          })
+        }
+        res.supply = supply
+        next()
+      })
+      .catch(next)
+  })
+  .get((req, res, next) => {
+    res.json(serializeSupply(res.supply))
+  })
+  .delete((req, res, next) => {
+    SuppliesService.deleteSupply(
+      req.app.get('db'),
+      req.params.supply_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
 //   .patch(jsonParser, (req, res, next) => {
 //     const { note_name, content, date_modified, folder_id } = req.body
 //     const noteToUpdate = { note_name, content, date_modified, folder_id }
@@ -102,6 +102,6 @@ suppliesRouter
 //         res.status(204).end()
 //       })
 //       .catch(next)
-//   })
+  // })
 
 module.exports = suppliesRouter

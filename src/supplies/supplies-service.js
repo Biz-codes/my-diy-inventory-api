@@ -13,19 +13,19 @@ const SuppliesService = {
         })
     },
 
-    // getById(knex, id) {
-    //   return knex
-    //     .from('noteful_notes')
-    //     .select('*')
-    //     .where('id', id)
-    //     .first()
-    // },
+    getById(knex, id) {
+      return knex
+        .from('supplies')
+        .select('*')
+        .where('id', id)
+        .first()
+    },
   
-    // deleteNote(knex, id) {
-    //   return knex('noteful_notes')
-    //     .where({ id })
-    //     .delete()
-    // },
+    deleteSupply(knex, id) {
+      return knex('supplies')
+        .where({ id })
+        .delete()
+    },
   
     // updateNote(knex, id, newNoteFields) {
     //   return knex('noteful_notes')

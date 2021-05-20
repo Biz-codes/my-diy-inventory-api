@@ -65,7 +65,7 @@ describe('Tools Endpoints', function() {
           .insert(testUsers)
       })
 
-      it(`creates a tool, responding with 201 and the new supply`, function() {
+      it(`creates a tool, responding with 201 and the new tool`, function() {
           
           const newTool = {
               tool_name: 'Test tool',
