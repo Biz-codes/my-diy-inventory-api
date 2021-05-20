@@ -29,16 +29,9 @@ projectsRouter
   })
 
   .post(jsonParser, (req, res, next) => {
-    const {
-      user_id,
-      project_name,
-      supplies_needed,
-      tools_needed,
-      instructions,
-      delivery_date,
-      done,
-    } = req.body;
-    const newSupply = {
+    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done,} = req.body;
+
+    const newProject = {
       user_id,
       project_name,
       supplies_needed,

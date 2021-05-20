@@ -7,7 +7,7 @@ function makeProjectsArray() {
             supplies_needed: 'chicken wire, screws, staples, wood',
             tools_needed: 'drill, staple gun',
             instructions: '...',
-            delivery_date: '2019-07-04',
+            delivery_date: '2019-07-04T00:00:00.000Z',
             done: true
         },
         {
@@ -17,7 +17,7 @@ function makeProjectsArray() {
             supplies_needed: 'blue thread, jersey knit cotton, pattern',
             tools_needed: 'marking pen, pins, scissors, sewing machine, sewing machine needle',
             instructions: '...',
-            delivery_date: '2021-09-30',
+            delivery_date: '2021-09-30T00:00:00.000Z',
             done: false
         }
     ]

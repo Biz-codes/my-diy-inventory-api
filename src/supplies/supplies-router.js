@@ -71,6 +71,7 @@ suppliesRouter
   .get((req, res, next) => {
     res.json(serializeSupply(res.supply))
   })
+  
   .delete((req, res, next) => {
     SuppliesService.deleteSupply(
       req.app.get('db'),
@@ -81,27 +82,28 @@ suppliesRouter
       })
       .catch(next)
   })
-//   .patch(jsonParser, (req, res, next) => {
-//     const { note_name, content, date_modified, folder_id } = req.body
-//     const noteToUpdate = { note_name, content, date_modified, folder_id }
+  
+  .patch(jsonParser, (req, res, next) => {
+    const { user_id, supply_name, details, quantity } = req.body
+    const supplyToUpdate = { user_id, supply_name, details, quantity }
 
-//     const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length
-//     if (numberOfValues === 0)
-//       return res.status(400).json({
-//         error: {
-//           message: `Request body must contain either 'note_name', 'content' or 'folder_id'`
-//         }
-//       })
+    const numberOfValues = Object.values(supplyToUpdate).filter(Boolean).length
+    if (numberOfValues === 0)
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'supply_name', 'details', or 'quantity'.`
+        }
+      })
 
-//     NotesService.updateNote(
-//       req.app.get('db'),
-//       req.params.note_id,
-//       noteToUpdate
-//     )
-//       .then(numRowsAffected => {
-//         res.status(204).end()
-//       })
-//       .catch(next)
-  // })
+    SuppliesService.updateSupply(
+      req.app.get('db'),
+      req.params.supply_id,
+      supplyToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
 
 module.exports = suppliesRouter
