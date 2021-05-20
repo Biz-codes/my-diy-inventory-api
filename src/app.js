@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 const usersRouter = require('./users/users-router')
 const suppliesRouter = require('./supplies/supplies-router')
 const toolsRouter = require('./tools/tools-router')
+const projectsRouter = require('./projects/projects-router')
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(helmet())
 app.use('/api/users', usersRouter)
 app.use('/api/supplies', suppliesRouter)
 app.use('/api/tools', toolsRouter)
+app.use('/api/projects', projectsRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
