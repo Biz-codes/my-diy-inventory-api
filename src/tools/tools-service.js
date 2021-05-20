@@ -20,5 +20,12 @@ const ToolsService = {
   deleteTool(knex, id) {
     return knex("tools").where({ id }).delete();
   },
-};
+
+  updateTool(knex, id, newToolFields) {
+    return knex('tools')
+      .where({ id })
+      .update(newToolFields)
+  },
+}
+
 module.exports = ToolsService;

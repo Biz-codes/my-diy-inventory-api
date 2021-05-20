@@ -66,13 +66,38 @@ toolsRouter
       })
       .catch(next)
   })
+  
   .get((req, res, next) => {
     res.json(serializeTool(res.tool))
   })
+  
   .delete((req, res, next) => {
     ToolsService.deleteTool(
       req.app.get('db'),
       req.params.tool_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+  
+  .patch(jsonParser, (req, res, next) => {
+    const { user_id, tool_name, details, quantity } = req.body
+    const toolToUpdate = { user_id, tool_name, details, quantity }
+
+    const numberOfValues = Object.values(toolToUpdate).filter(Boolean).length
+    if (numberOfValues === 0)
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'tool_name', 'details', or 'quantity'.`
+        }
+      })
+
+    ToolsService.updateTool(
+      req.app.get('db'),
+      req.params.tool_id,
+      toolToUpdate
     )
       .then(numRowsAffected => {
         res.status(204).end()

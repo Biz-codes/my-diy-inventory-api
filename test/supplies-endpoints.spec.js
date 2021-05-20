@@ -223,7 +223,7 @@ describe('Supplies Endpoints', function() {
           const updatedSupply = {
             supply_name: 'Updated supply',
             user_id: 1,
-            details: 'Test description',
+            details: 'Updated description',
             quantity: 1
           }
           const expectedSupply = {
