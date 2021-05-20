@@ -9,7 +9,7 @@ const jsonParser = express.json()
 const serializeTool = tool => ({
   id: tool.id,
   user_id: tool.user_id,
-  tool_name: xss(tool.supply_name),
+  tool_name: xss(tool.tool_name),
   details: xss(tool.details),
   quantity: tool.quantity
 })
