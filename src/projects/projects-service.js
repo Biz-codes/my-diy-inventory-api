@@ -27,6 +27,11 @@ const ProjectsService = {
           .delete()
       },
 
+      updateProject(knex, id, newProjectFields) {
+        return knex('supplies')
+          .where({ id })
+          .update(newProjectFields)
+      },
 }
   
 module.exports = ProjectsService

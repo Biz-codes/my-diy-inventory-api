@@ -29,7 +29,7 @@ projectsRouter
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done,} = req.body;
+    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done} = req.body;
 
     const newProject = {
       user_id,
@@ -81,6 +81,30 @@ projectsRouter
         res.status(204).end();
       })
       .catch(next);
-  });
+  })
+
+  .patch(jsonParser, (req, res, next) => {
+    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done } = req.body
+    const projectToUpdate = { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done }
+
+    const numberOfValues = Object.values(projectToUpdate).filter(Boolean).length
+    if (numberOfValues === 0)
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or'done'.`
+        }
+      })
+
+    ProjectsService.updateProject(
+      req.app.get('db'),
+      req.params.project_id,
+      projectToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
 
 module.exports = projectsRouter;
