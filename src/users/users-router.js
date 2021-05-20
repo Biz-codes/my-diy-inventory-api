@@ -8,7 +8,10 @@ const jsonParser = express.json()
 
 const serializeUser = user => ({
     id: user.id,
-    user_username: xss(user.user_username),
+    name: xss(user.name),
+    email: xss(user.email),
+    username: xss(user.username),
+    password: xss(user.password)
 })
 
 usersRouter
@@ -53,64 +56,6 @@ usersRouter
 //             .catch(next)
 //     })
 
-// foldersRouter
-//     .route('/:folder_id')
-//     .all((req, res, next) => {
-//         FoldersService.getById(
-//                 req.app.get('db'),
-//                 req.params.folder_id
-//             )
-//             .then(folder => {
-//                 if (!folder) {
-//                     return res.status(404).json({
-//                         error: {
-//                             message: `Folder doesn't exist`
-//                         }
-//                     })
-//                 }
-//                 res.folder = folder // save the article for the next middleware
-//                 next() // don't forget to call next so the next middleware happens!
-//             })
-//             .catch(next)
-//     })
-//     .get((req, res, next) => {
-//         res.json({
-//             id: res.folder.id,
-//             folder_name: res.folder.folder_name,
-//         })
-//     })
-//     .delete((req, res, next) => {
-//         FoldersService.deleteFolder(
-//                 req.app.get('db'),
-//                 req.params.folder_id
-//             )
-//             .then(() => {
-//                 res.status(204).end()
-//             })
-//             .catch(next)
-//     })
-//     .patch(jsonParser, (req, res, next) => {
-//         const { folder_name } = req.body
-//         const folderToUpdate = { folder_name }
 
-//         const numberOfValues = Object.values(folderToUpdate).filter(Boolean).length
-//         if (numberOfValues === 0) {
-//             return res.status(400).json({
-//                 error: {
-//                     message: `Request body must contain 'folder_name'`
-//                 }
-//             })
-//     }
-
-//         FoldersService.updateFolder(
-//             req.app.get('db'),
-//             req.params.folder_id,
-//             folderToUpdate
-//         )
-//             .then(numRowsAffected => {
-//                 res.status(204).end()
-//             })
-//                 .catch(next)
-//     })
 
 module.exports = usersRouter

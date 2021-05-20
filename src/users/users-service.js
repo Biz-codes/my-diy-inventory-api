@@ -1,6 +1,6 @@
 const UsersService = {
     getAllUsers(knex) {
-        return knex.select('*').from('my-diy-inventory_users')
+        return knex.select('*').from('users')
     },
     // insertFolder(knex, newFolder) {
     //     return knex
@@ -14,17 +14,6 @@ const UsersService = {
     // getById(knex, id) {
     //     return knex.from('noteful_folders').select('*').where('id', id).first()
     // },
-    // deleteFolder(knex, id) {
-    //    return knex('noteful_folders')
-    //      .where({ id })
-    //      .delete()
-    // },
-    // updateFolder(knex, id, newFolderFields) {
-    //    return knex('noteful_folders')
-    //      .where({ id })
-    //      .update(newFolderFields)
-    // },
-        
 }
 
 module.exports = UsersService 
