@@ -10,7 +10,7 @@ ALTER TABLE tools
         user_id INTEGER REFERENCES users(id)
         ON DELETE CASCADE NOT NULL;
 
-INSERT INTO tools (supply_name, user_id, details, quantity)
+INSERT INTO tools (tool_name, user_id, details, quantity)
     VALUES
         ('hammer', 2, 'small, yellow grip', 2),
         ('paintbrush', 2, 'large', 10),
