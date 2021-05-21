@@ -168,91 +168,94 @@ describe('Projects Endpoints', function() {
         })
       })
 
-    //   describe(`PATCH /api/supplies/:supply_id`, () => {
-    //     context(`Given no supplies`, () => {
-    //       it(`responds with 404`, () => {
-    //         const supplyId = 123456
-    //         return supertest(app)
-    //           .patch(`/api/supplies/${supplyId}`)
-    //           .expect(404, { error: { message: `Supply doesn't exist` } })
-    //       })
-    //     })
+      describe(`PATCH /api/projects/:project_id`, () => {
+        context(`Given no projects`, () => {
+          it(`responds with 404`, () => {
+            const projectId = 123456
+            return supertest(app)
+              .patch(`/api/projects/${projectId}`)
+              .expect(404, { error: { message: `Project doesn't exist` } })
+          })
+        })
     
-    //     context('Given there are supplies in the database', () => {
-    //       const testUsers = makeUsersArray();
-    //           const testSupplies = makeSuppliesArray()
-        
-    //           beforeEach('insert supplies', () => {
-    //             return db
-    //             .into('users')
-    //               .insert(testUsers)
-    //               .then(() => {
-    //                 return db
-    //                   .into('supplies')
-    //                   .insert(testSupplies)
-    //               })
-                  
-    //           })
-          
-    //       it('responds with 204 and updates the supply', () => {
-    //         const idToUpdate = 2
-    //         const updatedSupply = {
-    //           supply_name: 'Updated supply',
-    //           user_id: 1,
-    //           details: 'Updated description',
-    //           quantity: 1
-    //         }
-    //         const expectedSupply = {
-    //           ...testSupplies[idToUpdate - 1],
-    //           ...updatedSupply
-    //         }
-    //         return supertest(app)
-    //           .patch(`/api/supplies/${idToUpdate}`)
-    //           .send(updatedSupply)
-    //           .expect(204)
-    //           .then(res =>
-    //             supertest(app)
-    //               .get(`/api/supplies/${idToUpdate}`)
-    //               .expect(expectedSupply)
-    //           )
-    //       })
+        context('Given there are projects in the database', () => {
+          const testUsers = makeUsersArray();
+          const testProjects = makeProjectsArray()
     
-    //       it(`responds with 400 when no required fields supplied`, () => {
-    //         const idToUpdate = 2
-    //         return supertest(app)
-    //           .patch(`/api/supplies/${idToUpdate}`)
-    //           .send({ irrelevantField: 'foo' })
-    //           .expect(400, {
-    //             error: {
-    //               message: `Request body must contain either 'supply_name', 'details', or 'quantity'.`
-    //             }
-    //           })
-    //       })
+          beforeEach('insert projects', () => {
+            return db
+            .into('users')
+              .insert(testUsers)
+              .then(() => {
+                return db
+                  .into('projects')
+                  .insert(testProjects)
+              })
+              
+          })
           
-    //       it(`responds with 204 when updating only a subset of fields`, () => {
-    //         const idToUpdate = 2
-    //         const updatedSupply = {
-    //           supply_name: 'Updated supply',
-    //         }
-    //         const expectedSupply = {
-    //           ...testSupplies[idToUpdate - 1],
-    //           ...updatedSupply
-    //         }
+          it('responds with 204 and updates the project', () => {
+            const idToUpdate = 2
+            const updatedProject = {
+              user_id: 1,
+              project_name: 'Updated project',
+              supplies_needed: 'stuff',
+              tools_needed: 'things',
+              instructions: 'steps',
+              delivery_date: '2019-07-04T00:00:00.000Z',
+              done: false
+            }
+            const expectedProject = {
+              ...testProjects[idToUpdate - 1],
+              ...updatedProject
+            }
+            return supertest(app)
+              .patch(`/api/projects/${idToUpdate}`)
+              .send(updatedProject)
+              .expect(204)
+              .then(res =>
+                supertest(app)
+                  .get(`/api/projects/${idToUpdate}`)
+                  .expect(expectedProject)
+              )
+          })
+    
+          it(`responds with 400 when no required fields supplied`, () => {
+            const idToUpdate = 2
+            return supertest(app)
+              .patch(`/api/projects/${idToUpdate}`)
+              .send({ irrelevantField: 'foo' })
+              .expect(400, {
+                error: {
+                  message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or 'done'.`
+                }
+              })
+          })
+          
+          it(`responds with 204 when updating only a subset of fields`, () => {
+            const idToUpdate = 2
+            const updatedProject = {
+              project_name: 'Updated project',
+            }
+            const expectedProject = {
+              ...testProjects[idToUpdate - 1],
+              ...updatedProject
+            }
             
-    //         return supertest(app)
-    //           .patch(`/api/supplies/${idToUpdate}`)
-    //           .send({
-    //             ...updatedSupply,
-    //             fieldToIgnore: 'should not be in GET response'
-    //           })
-    //           .expect(204)
-    //             .then(res =>
-    //               supertest(app)
-    //                 .get(`/api/supplies/${idToUpdate}`)
-    //                 .expect(expectedSupply)
-    //             )
-    //       })
+            return supertest(app)
+              .patch(`/api/projects/${idToUpdate}`)
+              .send({
+                ...updatedProject,
+                fieldToIgnore: 'should not be in GET response'
+              })
+              .expect(204)
+                .then(res =>
+                  supertest(app)
+                    .get(`/api/projects/${idToUpdate}`)
+                    .expect(expectedProject)
+                )
+          })
           
-    //     })
-    //   })
+        })
+      })
 })

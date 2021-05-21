@@ -91,7 +91,7 @@ projectsRouter
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
-          message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or'done'.`
+          message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or 'done'.`
         }
       })
 

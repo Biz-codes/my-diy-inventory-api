@@ -28,7 +28,7 @@ const ProjectsService = {
       },
 
       updateProject(knex, id, newProjectFields) {
-        return knex('supplies')
+        return knex('projects')
           .where({ id })
           .update(newProjectFields)
       },

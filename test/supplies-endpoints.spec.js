@@ -279,7 +279,4 @@ describe('Supplies Endpoints', function() {
         
       })
     })
-  
-
-
 })

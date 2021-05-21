@@ -6,15 +6,16 @@ const UsersService = {
         // console.log(user)
         return {
             id: user.id,
-            user_name: xss(user.user_name),
+            name: xss(user.name),
+            username: xss(user.username),
         }
     },
     getAllUsers(knex) {
         return knex.select('*').from('users')
     },
-    hasUserWithUserName(db, user_name) {
+    hasUserWithUserName(db, username) {
         return db('users')
-            .where({ user_name })
+            .where({ username })
             .first()
             .then(user => !!user)
     },

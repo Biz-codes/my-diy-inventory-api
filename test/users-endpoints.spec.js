@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
-const { makeUsersArray } = require('./users.fixtures')
+const { makeUsersArray, makeMaliciousUser} = require('./users.fixtures')
 
 describe('Users Endpoints', function() {
     let db
@@ -17,20 +17,12 @@ describe('Users Endpoints', function() {
     after('disconnect from db', () => db.destroy())    
 
     // before('clean the table', () => db('users').truncate())
-    before('clean the table', () => db.raw('TRUNCATE users, supplies RESTART IDENTITY CASCADE'))
+    before('clean the table', () => db.raw('TRUNCATE users RESTART IDENTITY CASCADE'))
 
     // afterEach('cleanup',() => db('users').truncate())
-    afterEach('cleanup',() => db.raw('TRUNCATE users, supplies RESTART IDENTITY CASCADE'))
+    afterEach('cleanup',() => db.raw('TRUNCATE users RESTART IDENTITY CASCADE'))
 
     describe(`GET /api/users`, () => {
-
-        context(`Given no users`, () => {
-            it(`responds with 200 and an empty list`, () => {
-              return supertest(app)
-                .get('/api/users')
-                .expect(200, [])
-            })
-        })
 
         context('Given there are users in the database', () => {
             const testUsers = makeUsersArray();
@@ -41,58 +33,64 @@ describe('Users Endpoints', function() {
                 .insert(testUsers)    
             })
       
-            it('responds with 200 and all of the users', () => {
+            it('responds with 200 and all of the users', function () {
               return supertest(app)
                 .get('/api/users')
-                .expect(200, testUsers)
-            })
-        })
-    })
+                .set('Authorization', `Bearer ${process.env.API_TOKEN}`) 
+                .expect(200)
+                .expect(res => {
+                    expect(res.body.id).to.eql(testUsers.id)
+                    expect(res.body.name).to.eql(testUsers.name)
+                    expect(res.body.username).to.eql(testUsers.username)
+                })
+            });
 
-    
+        });
 
-    // describe(`POST /api/folders`, () => {
-  
-    //     it(`creates a folder, responding with 201 and the new folder`, function() {
-    //       const newFolder = {
-    //           folder_name: 'Test folder',
-    //       }
-    //       return supertest(app)
-    //         .post('/api/folders')
-    //         .send(newFolder)
-    //         .expect(201) 
-    //         .expect(res => {
-    //           expect(res.body.folder_name).to.eql(newFolder.folder_name)
-    //           expect(res.body).to.have.property('id')
-    //           expect(res.headers.location).to.eql(`/api/folders/${res.body.id}`)
-    //         })
-    //         .then(res =>
-    //           supertest(app)
-    //             .get(`/api/folders/${res.body.id}`)
-    //             .expect(res.body)
-    //         )
-    //     })
-    
-    //     const requiredFields = ['folder_name']
-    
-    //     requiredFields.forEach(field => {
-    //       const newFolder = {
-    //         folder_name: 'Test folder',
-    //       }
+        context('Given an XSS attack user', () => {
+          const testUsers = makeUsersArray();
+          const { maliciousUser, expectedUser} = makeMaliciousUser();
+
+          beforeEach('insert malicious user into db', () => {
+              return db  
+                  .into('users')
+                  .insert(maliciousUser)
+          });
+              
+          it(`removes XSS attack content`, () => {
+              return supertest(app)
+                  .get(`/api/users/${maliciousUser.id}`)
+                  .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                  .expect(200)
+                  .expect(res => {
+                      expect(res.body.name).to.eql(expectedUser.name)
+                      expect(res.body.username).to.eql(expectedUser.username)
+                      expect(res.body.password).to.eql(expectedUser.password)
+                      
+                  })
+          });
       
-    //       it(`responds with 400 and an error message when the '${field}' is missing`, () => {
-    //         delete newFolder[field]
-      
-    //         return supertest(app)
-    //           .post('/api/folders')
-    //           .send(newFolder)
-    //           .expect(400, {
-    //             error: { message: `Missing '${field}' in request body` }
-    //           })
-    //       })
-    //     })
-    // })
+      });
+ 
+  });
 
-    
+  describe(`POST /api/users`, () => {
+
+      it(`creates a user, responding with 201`, function () {
+          const newUser = {
+              name: 'Test name',
+              username: 'Test new user', 
+              password: 'aaAA11!!',
+
+          };
+          return supertest(app)
+              .post(`/api/users/`)
+              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+              .send(newUser)
+              .expect(201)
+      });
+
+
+    });
 
 })
