@@ -31,6 +31,28 @@ function makeSuppliesArray() {
     ]
 }
 
+function makeMaliciousSupply() {
+    const maliciousSupply = {
+        id: 1,
+        user_id: 1,
+        supply_name: "Naughty naughty very naughty <script>alert('xss');</script>",
+        details: "Naughty naughty very naughty <script>alert('xss');</script>",
+        quantity: 1
+    }
+    const expectedSupply = {
+        ...makeMaliciousSupply,
+        user_id: 1,
+        supply_name: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;', // converts script to render it inert
+        details: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;', // converts script to render it inert
+        quantity: 1
+    }
+    return {
+        maliciousSupply,
+        expectedSupply,
+    }
+}
+
 module.exports = {
-    makeSuppliesArray
+    makeSuppliesArray,
+    makeMaliciousSupply,
 }

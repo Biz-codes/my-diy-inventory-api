@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
 const { makeUsersArray } = require('./users.fixtures')
-const { makeSuppliesArray } = require('./supplies.fixtures')
+const { makeSuppliesArray, makeMaliciousSupply } = require('./supplies.fixtures')
 
 describe('Supplies Endpoints', function() {
     let db
@@ -53,27 +53,33 @@ describe('Supplies Endpoints', function() {
                 .expect(200, testSupplies)
             })
         })
+      
+        context(`Given an XSS attack supply`, () => {
+          const { makeMaliciousSupply, expectedSupply } = makeMaliciousSupply()
+      
+          beforeEach('insert malicious supply', () => {
+            return db
+              .into('supplies')
+              .insert([ maliciousSupply ])
+          })
+      
+          it('removes XSS attack content', () => {
+            return supertest(app)
+              .get(`/api/supplies`)
+              .expect(200)
+              .expect(res => {
+                expect(res.body[0].supply_name).to.eql(expectedSupply.supply_name)
+                expect(res.body[0].details).to.eql(expectedSupply.details)
+                expect(res.body[0].quantity).to.eql(expectedSupply.quantity)
+              })
+          })
+        })
+      })
 
-        // context(`Given an XSS attack note`, () => {
-        //     const { maliciousNote, expectedNote } = makeMaliciousNote()
-        
-        //     beforeEach('insert malicious note', () => {
-        //       return db
-        //         .into('noteful_notes')
-        //         .insert([ maliciousNote ])
-        //     })
-        
-        //     it('removes XSS attack content', () => {
-        //       return supertest(app)
-        //         .get(`/api/notes`)
-        //         .expect(200)
-        //         .expect(res => {
-        //           expect(res.body[0].note_name).to.eql(expectedNote.note_name)
-        //           expect(res.body[0].content).to.eql(expectedNote.content)
-        //         })
-        //     })
-        // })
-    })
+      });
+ 
+  
+
 
 
     describe(`POST /api/supplies`, () => {
@@ -114,12 +120,12 @@ describe('Supplies Endpoints', function() {
         })
     
   
-      const requiredFields = ['supply_name', 'user_id', 'details', 'quantity']
+      const requiredFields = ['user_id', 'supply_name', 'details', 'quantity']
   
       requiredFields.forEach(field => {
         const newSupply = {
-            supply_name: 'Test supply',
             user_id: 1,
+            supply_name: 'Test supply',            
             details: 'Test description',
             quantity: 1
         }
@@ -136,19 +142,20 @@ describe('Supplies Endpoints', function() {
             })
         })
     })
+
+it('removes XSS attack content', () => {
+  const {maliciousSupply, expectedSupply}
+  return supertest(app)
+    .post(`/api/supplies`)
+    .expect(201)
+    .expect(res => {
+      expect(res.body[0].supply_name).to.eql(expectedSupply.supply_name)
+      expect(res.body[0].details).to.eql(expectedSupply.details)
+      expect(res.body[0].quantity).to.eql(expectedSupply.quantity)
+    })
 })
-    //   // it('removes XSS attack content from response', () => {
-    //   //   const { maliciousArticle, expectedArticle } = makeMaliciousArticle()
-    //   //   return supertest(app)
-    //   //     .post(`/api/articles`)
-    //   //     .send(maliciousArticle)
-    //   //     .expect(201)
-    //   //     .expect(res => {
-    //   //       expect(res.body.title).to.eql(expectedArticle.title)
-    //   //       expect(res.body.content).to.eql(expectedArticle.content)
-    //   //     })
-    //   // })
-    // })
+
+})
 
     describe(`DELETE /api/supplies/:supply_id`, () => {
       context(`Given no supplies`, () => {

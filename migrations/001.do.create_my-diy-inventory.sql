@@ -33,7 +33,6 @@ CREATE TABLE projects (
 );
 
 
-
 INSERT INTO users (name, username, password)
 VALUES
     ('Biz Hight', 'elizabeth.biz.hight@gmail.com', 'Go4Admin!'),
