@@ -61,7 +61,8 @@ suppliesRouter
           },
       });
   }
-  SuppliesService.getSuppliesByUserId(req.app.get("db"), req.params.user_id)
+  SuppliesService.getSuppliesByUserId(
+    req.app.get("db"), req.params.user_id)
       .then((supplies_inventory) => {
           if (!supplies_inventory) {
               return res.status(404).json({

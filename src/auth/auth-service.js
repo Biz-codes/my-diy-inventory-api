@@ -6,7 +6,7 @@ const AuthService = {
     getUserWithUserName(db, username) {
         console.log('authServivce:', username)
         return db('users')
-            .where( 'user_name', username )
+            .where( 'username', username )
             .first()
     },
     comparePasswords(password, hash) {
