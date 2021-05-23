@@ -8,11 +8,11 @@ authRouter
   .post('/login', jsonBodyParser, (req, res, next) => {
 
     const {
-      username,
+      user_name,
       password
     } = req.body
     const loginUser = {
-      username,
+      user_name,
       password
     }
 
@@ -23,7 +23,7 @@ authRouter
         })
     AuthService.getUserWithUserName(
         req.app.get('db'),
-        loginUser.username
+        loginUser.user_name
       )
       .then(dbUser => {
         console.log('dbUser:', dbUser)
@@ -39,7 +39,7 @@ authRouter
                 error: 'Incorrect email or password',
               })
               
-            const sub = dbUser.username
+            const sub = dbUser.user_name
             const payload = {
               user_id: dbUser.id
             }
