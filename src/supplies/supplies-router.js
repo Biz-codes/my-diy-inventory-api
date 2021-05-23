@@ -50,6 +50,36 @@ suppliesRouter
       .catch(next)
   })
 
+
+suppliesRouter
+  .route("/my-supplies/:user_id")
+  .all((req, res, next) => {
+    if (isNaN(parseInt(req.params.user_id))) {
+      return res.status(404).json({
+          error: {
+              message: `Invalid id`,
+          },
+      });
+  }
+  SuppliesService.getSuppliesByUserId(req.app.get("db"), req.params.user_id)
+      .then((supplies_inventory) => {
+          if (!supplies_inventory) {
+              return res.status(404).json({
+                  error: {
+                      message: `Supplies Inventory doesn't exist`,
+                  },
+              });
+          }
+          res.supplies_inventory = supplies_inventory;
+          next();
+      })
+      .catch(next);
+})
+.get((req, res, next) => {
+  res.json(res.supplies_inventory.rows);
+})
+
+
 suppliesRouter
   .route('/:supply_id')
   .all((req, res, next) => {

@@ -13,6 +13,13 @@ const SuppliesService = {
         })
     },
 
+    getSuppliesByUserId(knex, user_id) {
+      return knex
+        .from('supplies')
+        .select('*')
+        .where('user_id', user_id)
+    },
+
     getById(knex, id) {
       return knex
         .from('supplies')

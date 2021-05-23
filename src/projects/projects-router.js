@@ -57,6 +57,35 @@ projectsRouter
       .catch(next);
   });
 
+
+  projectsRouter
+  .route("/my-projects/:user_id")
+  .all((req, res, next) => {
+    if (isNaN(parseInt(req.params.user_id))) {
+      return res.status(404).json({
+          error: {
+              message: `Invalid id`,
+          },
+      });
+  }
+  ProjectsService.getProjectsByUserId(req.app.get("db"), req.params.user_id)
+      .then((projects_list) => {
+          if (!projects_list) {
+              return res.status(404).json({
+                  error: {
+                      message: `Projects List doesn't exist`,
+                  },
+              });
+          }
+          res.projects_list = projects_list;
+          next();
+      })
+      .catch(next);
+})
+.get((req, res, next) => {
+  res.json(res.projects_list.rows);
+})
+
 projectsRouter
   .route("/:project_id")
   .all((req, res, next) => {

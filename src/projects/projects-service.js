@@ -13,6 +13,13 @@ const ProjectsService = {
           })
       },
   
+      getProjectsByUserId(knex, user_id) {
+        return knex
+          .from('projects')
+          .select('*')
+          .where('user_id', user_id)
+      },
+
       getById(knex, id) {
         return knex
           .from('projects')

@@ -13,6 +13,13 @@ const ToolsService = {
       });
   },
 
+  getToolsByUserId(knex, user_id) {
+    return knex
+      .from('tools')
+      .select('*')
+      .where('user_id', user_id)
+  },
+
   getById(knex, id) {
     return knex.from("tools").select("*").where("id", id).first();
   },

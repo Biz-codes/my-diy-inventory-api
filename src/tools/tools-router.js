@@ -49,6 +49,35 @@ toolsRouter
   })
 
   toolsRouter
+  .route("/my-tools/:user_id")
+  .all((req, res, next) => {
+    if (isNaN(parseInt(req.params.user_id))) {
+      return res.status(404).json({
+          error: {
+              message: `Invalid id`,
+          },
+      });
+  }
+  ToolsService.getToolsByUserId(req.app.get("db"), req.params.user_id)
+      .then((tools_inventory) => {
+          if (!tools_inventory) {
+              return res.status(404).json({
+                  error: {
+                      message: `Tools Inventory doesn't exist`,
+                  },
+              });
+          }
+          res.tools_inventory = tools_inventory;
+          next();
+      })
+      .catch(next);
+})
+.get((req, res, next) => {
+  res.json(res.tools_inventory.rows);
+})
+
+
+  toolsRouter
   .route('/:tool_id')
   .all((req, res, next) => {
     ToolsService.getById(
