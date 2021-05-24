@@ -68,22 +68,13 @@ projectsRouter
           },
       });
   }
-  ProjectsService.getProjectsByUserId(req.app.get("db"), req.params.user_id)
-      .then((projects_list) => {
-          if (!projects_list) {
-              return res.status(404).json({
-                  error: {
-                      message: `Projects List doesn't exist`,
-                  },
-              });
-          }
-          res.projects_list = projects_list;
-          next();
-      })
-      .catch(next);
-})
-.get((req, res, next) => {
-  res.json(res.projects_list.rows);
+  ProjectsService.getProjectsByUserId(
+    req.app.get("db"), req.params.user_id)
+    .then((projects) => {
+      res.json(projects.map(serializeProject))
+        })
+        .catch(next);
+
 })
 
 projectsRouter
