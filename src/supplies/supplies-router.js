@@ -63,21 +63,12 @@ suppliesRouter
   }
   SuppliesService.getSuppliesByUserId(
     req.app.get("db"), req.params.user_id)
-      .then((supplies_inventory) => {
-          if (!supplies_inventory) {
-              return res.status(404).json({
-                  error: {
-                      message: `Supplies Inventory doesn't exist`,
-                  },
-              });
-          }
-          res.supplies_inventory = supplies_inventory;
-          next();
-      })
-      .catch(next);
-})
-.get((req, res, next) => {
-  res.json(res.supplies_inventory.rows);
+      .then((supplies) => {
+        res.json(supplies.map(serializeSupply))
+          })
+          .catch(next);
+ 
+
 })
 
 
