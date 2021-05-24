@@ -31,29 +31,3 @@ CREATE TABLE projects (
     delivery_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     done BOOLEAN
 );
-
-
-INSERT INTO users (name, username, password)
-VALUES
-    ('Biz Hight', 'elizabeth.biz.hight@gmail.com', 'Go4Admin!'),
-    ('Demo user', 'demo.email@gmail.com', 'Go4Demo!');
-
-INSERT INTO supplies (user_id, supply_name, details, quantity)
-    VALUES
-        (2, 'fabric - cotton - jersey knit', 'blue, yards', 3),
-        (2, 'nails', '...', 50),
-        (2, 'origami paper', 'multicolor, sheets', 30),
-        (2, 'thread', 'green, spools', 1);
-
-INSERT INTO tools (user_id, tool_name, details, quantity)
-    VALUES
-        (2, 'hammer', 'small, yellow grip', 2),
-        (2, 'paintbrush', 'large', 10),
-        (2, 'sandpaper', 'fine', 5),
-        (2, 'sewing machine', 'singer', 1);
-
-INSERT INTO projects (user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done)
-    VALUES
-        (2, 'Raised Bed', 'chicken wire, screws, staples, wood', 'drill, staple gun', '...', '2019-07-04', true),
-        (2, 'Stormy Pants', 'blue thread, jersey knit cotton, pattern', 'marking pen, pins, scissors, sewing machine, sewing machine needle', '...', '2021-09-30', false);
-                    

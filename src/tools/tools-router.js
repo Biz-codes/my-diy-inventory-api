@@ -58,22 +58,12 @@ toolsRouter
           },
       });
   }
-  ToolsService.getToolsByUserId(req.app.get("db"), req.params.user_id)
-      .then((tools_inventory) => {
-          if (!tools_inventory) {
-              return res.status(404).json({
-                  error: {
-                      message: `Tools Inventory doesn't exist`,
-                  },
-              });
-          }
-          res.tools_inventory = tools_inventory;
-          next();
-      })
-      .catch(next);
-})
-.get((req, res, next) => {
-  res.json(res.tools_inventory.rows);
+  ToolsService.getToolsByUserId(
+    req.app.get("db"), req.params.user_id)
+      .then((tools) => {
+        res.json(tools.map(serializeTool))
+          })
+          .catch(next);
 })
 
 
