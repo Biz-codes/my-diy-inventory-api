@@ -29,5 +29,5 @@ CREATE TABLE projects (
     tools_needed TEXT,
     instructions TEXT,
     delivery_date TIMESTAMPTZ NOT NULL DEFAULT now(),
-    done BOOLEAN
+    done VARCHAR(255) NOT NULL
 );

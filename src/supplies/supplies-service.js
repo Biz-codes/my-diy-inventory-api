@@ -18,6 +18,7 @@ const SuppliesService = {
         .from('supplies')
         .select('*')
         .where('user_id', user_id)
+        // .sort(supply_name)
     },
 
     getById(knex, id) {
