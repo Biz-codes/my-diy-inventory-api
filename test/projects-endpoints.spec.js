@@ -2,9 +2,9 @@ const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
 const { makeUsersArray } = require('./users.fixtures')
-const { makeProjectsArray } = require('./projects.fixtures')
+const { makeProjectsArray, makeMaliciousProject } = require('./projects.fixtures')
 
-describe('Projects Endpoints', function() {
+describe.only('Projects Endpoints', function() {
     let db
 
     before('make knex instance', () => {
@@ -53,6 +53,35 @@ describe('Projects Endpoints', function() {
                 .expect(200, testProjects)
             })
         })
+
+        context(`Given an XSS attack project`, () => {
+          const testUsers = makeUsersArray();
+          const { maliciousProject, expectedProject } = makeMaliciousProject();
+    
+          beforeEach("insert malicious project", () => {
+            return db
+              .into("users")
+              .insert(testUsers)
+              .then(() => {
+                return db.into("projects").insert([maliciousProject]);
+              });
+          });
+    
+          it("removes XSS attack content", () => {
+            return supertest(app)
+              .get(`/api/projects`)
+              .expect(200)
+              .expect((res) => {
+                expect(res.body[0].user_id).to.eql(expectedProject.user_id);
+                expect(res.body[0].project_name).to.eql(expectedProject.project_name);
+                expect(res.body[0].supplies_needed).to.eql(expectedProject.supplies_needed);
+                expect(res.body[0].tools_needed).to.eql(expectedProject.tools_needed);
+                expect(res.body[0].instructions).to.eql(expectedProject.instructions);
+                expect(res.body[0].delivery_date).to.eql(expectedProject.delivery_date);
+                expect(res.body[0].done).to.eql(expectedProject.done);
+              });
+          });
+        });
     })
 
     describe(`POST /api/projects`, () => {
@@ -74,7 +103,7 @@ describe('Projects Endpoints', function() {
                 tools_needed: 'things',
                 instructions: 'steps',
                 delivery_date: '2019-07-04T00:00:00.000Z',
-                done: false
+                done: "to-do it myself"
             }
             return supertest(app)
                 .post('/api/projects')
@@ -109,7 +138,7 @@ describe('Projects Endpoints', function() {
             tools_needed: 'things',
             instructions: 'steps',
             delivery_date: '2019-07-04T00:00:00.000Z',
-            done: false
+            done: "to-do it myself"
         }
       
     
@@ -124,6 +153,23 @@ describe('Projects Endpoints', function() {
             })
         })
     })
+
+    it("removes XSS attack content", () => {
+      const { maliciousProject, expectedProject } = makeMaliciousProject();
+      return supertest(app)
+        .post(`/api/projects`)
+        .send(maliciousProject)
+        .expect(201)
+        .expect((res) => {
+          expect(res.body.user_id).to.eql(expectedProject.user_id);
+          expect(res.body.project_name).to.eql(expectedProject.project_name);
+          expect(res.body.supplies_needed).to.eql(expectedProject.supplies_needed);
+          expect(res.body.tools_needed).to.eql(expectedProject.tools_needed);
+          expect(res.body.instructions).to.eql(expectedProject.instructions);
+          expect(res.body.delivery_date).to.eql(expectedProject.delivery_date);
+          expect(res.body.done).to.eql(expectedProject.done);
+        });
+    });
 })
 
     describe(`DELETE /api/projects/:project_id`, () => {
@@ -203,7 +249,7 @@ describe('Projects Endpoints', function() {
               tools_needed: 'things',
               instructions: 'steps',
               delivery_date: '2019-07-04T00:00:00.000Z',
-              done: false
+              done: "to-do it myself"
             }
             const expectedProject = {
               ...testProjects[idToUpdate - 1],

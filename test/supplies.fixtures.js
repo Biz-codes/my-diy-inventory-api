@@ -40,10 +40,10 @@ function makeMaliciousSupply() {
         quantity: 1
     }
     const expectedSupply = {
-        ...makeMaliciousSupply,
+        ...maliciousSupply,
         user_id: 1,
-        supply_name: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;', // converts script to render it inert
-        details: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;', // converts script to render it inert
+        supply_name: 'Naughty naughty very naughty &lt;script&gt;alert(\'xss\');&lt;/script&gt;', // converts script to render it inert
+        details: 'Naughty naughty very naughty &lt;script&gt;alert(\'xss\');&lt;/script&gt;', // converts script to render it inert
         quantity: 1
     }
     return {

@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const knex = require("knex");
 const app = require("../src/app");
 const { makeUsersArray } = require("./users.fixtures");
-const { makeToolsArray } = require("./tools.fixtures");
+const { makeToolsArray, makeMaliciousTool } = require("./tools.fixtures");
 
 describe("Tools Endpoints", function () {
   let db;
@@ -49,6 +49,33 @@ describe("Tools Endpoints", function () {
         return supertest(app).get("/api/tools").expect(200, testTools);
       });
     });
+
+    context(`Given an XSS attack tool`, () => {
+      const testUsers = makeUsersArray();
+      const { maliciousTool, expectedTool } = makeMaliciousTool();
+
+      beforeEach("insert malicious tool", () => {
+        return db
+          .into("users")
+          .insert(testUsers)
+          .then(() => {
+            return db.into("tools").insert([maliciousTool]);
+          });
+      });
+
+      it("removes XSS attack content", () => {
+        return supertest(app)
+          .get(`/api/tools`)
+          .expect(200)
+          .expect((res) => {
+            expect(res.body[0].user_id).to.eql(expectedTool.user_id);
+            expect(res.body[0].tool_name).to.eql(expectedTool.tool_name);
+            expect(res.body[0].details).to.eql(expectedTool.details);
+            expect(res.body[0].quantity).to.eql(expectedTool.quantity);
+          });
+      });
+    });
+
   });
 
   describe(`POST /api/tools`, () => {
@@ -103,6 +130,21 @@ describe("Tools Endpoints", function () {
           });
       });
     });
+
+    it("removes XSS attack content", () => {
+      const { maliciousTool, expectedTool } = makeMaliciousTool();
+      return supertest(app)
+        .post(`/api/tools`)
+        .send(maliciousTool)
+        .expect(201)
+        .expect((res) => {
+          expect(res.body.user_id).to.eql(expectedTool.user_id);
+          expect(res.body.tool_name).to.eql(expectedTool.tool_name);
+          expect(res.body.details).to.eql(expectedTool.details);
+          expect(res.body.quantity).to.eql(expectedTool.quantity);
+        });
+    });
+
   });
 
   describe(`DELETE /api/tools/:tool_id`, () => {

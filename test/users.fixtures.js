@@ -2,15 +2,15 @@ function makeUsersArray() {
     return [
         {
             id: 1,
-            name: 'Biz Hight',
-            username: 'elizabeth.biz.hight@gmail.com',
-            password: 'Go4Admin!'
+            name: 'Dorothy Gale',
+            username: 'not-in-kansas@gmail.com',
+            password: 'Fabulous1'
         },
         {
             id: 2,
-            name: 'Demo user',
-            username: 'demo.email@gmail.com',
-            password: 'Go4Demo!'
+            name: 'Scarecrow',
+            username: 'no-brain.email@gmail.com',
+            password: 'Fabulous1'
         }
     ]
 }
