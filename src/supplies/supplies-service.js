@@ -1,6 +1,7 @@
 const SuppliesService = {
     getAllSupplies(knex) {
-      return knex.select('*').from('supplies')
+      return knex.select('*')
+        .from('supplies')
     },
   
     insertSupply(knex, newSupply) {
@@ -18,7 +19,6 @@ const SuppliesService = {
         .from('supplies')
         .select('*')
         .where('user_id', user_id)
-        // .sort(supply_name)
     },
 
     getById(knex, id) {

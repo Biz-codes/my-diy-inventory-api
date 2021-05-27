@@ -1,6 +1,7 @@
 const ToolsService = {
   getAllTools(knex) {
-    return knex.select("*").from("tools");
+    return knex.select("*")
+      .from("tools");
   },
 
   insertTool(knex, newTool) {
@@ -21,11 +22,17 @@ const ToolsService = {
   },
 
   getById(knex, id) {
-    return knex.from("tools").select("*").where("id", id).first();
+    return knex
+      .from("tools")
+      .select("*")
+      .where("id", id)
+      .first();
   },
 
   deleteTool(knex, id) {
-    return knex("tools").where({ id }).delete();
+    return knex("tools")
+      .where({ id })
+      .delete();
   },
 
   updateTool(knex, id, newToolFields) {

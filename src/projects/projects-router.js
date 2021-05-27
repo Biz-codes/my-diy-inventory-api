@@ -29,7 +29,15 @@ projectsRouter
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done} = req.body;
+    const {
+      user_id,
+      project_name,
+      supplies_needed,
+      tools_needed,
+      instructions,
+      delivery_date,
+      done,
+    } = req.body;
 
     const newProject = {
       user_id,
@@ -57,25 +65,20 @@ projectsRouter
       .catch(next);
   });
 
-
-  projectsRouter
-  .route("/my-projects/:user_id")
-  .all((req, res, next) => {
-    if (isNaN(parseInt(req.params.user_id))) {
-      return res.status(404).json({
-          error: {
-              message: `Invalid id`,
-          },
-      });
+projectsRouter.route("/my-projects/:user_id").all((req, res, next) => {
+  if (isNaN(parseInt(req.params.user_id))) {
+    return res.status(404).json({
+      error: {
+        message: `Invalid id`,
+      },
+    });
   }
-  ProjectsService.getProjectsByUserId(
-    req.app.get("db"), req.params.user_id)
+  ProjectsService.getProjectsByUserId(req.app.get("db"), req.params.user_id)
     .then((projects) => {
-      res.json(projects.map(serializeProject))
-        })
-        .catch(next);
-
-})
+      res.json(projects.map(serializeProject));
+    })
+    .catch(next);
+});
 
 projectsRouter
   .route("/:project_id")
@@ -104,27 +107,43 @@ projectsRouter
   })
 
   .patch(jsonParser, (req, res, next) => {
-    const { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done } = req.body
-    const projectToUpdate = { user_id, project_name, supplies_needed, tools_needed, instructions, delivery_date, done }
+    const {
+      user_id,
+      project_name,
+      supplies_needed,
+      tools_needed,
+      instructions,
+      delivery_date,
+      done,
+    } = req.body;
+    const projectToUpdate = {
+      user_id,
+      project_name,
+      supplies_needed,
+      tools_needed,
+      instructions,
+      delivery_date,
+      done,
+    };
 
-    const numberOfValues = Object.values(projectToUpdate).filter(Boolean).length
+    const numberOfValues =
+      Object.values(projectToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
-          message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or 'done'.`
-        }
-      })
+          message: `Request body must contain either 'project_name', 'supplies_needed', 'tools_needed', 'instructions', 'delivery_date', or 'done'.`,
+        },
+      });
 
     ProjectsService.updateProject(
-      req.app.get('db'),
+      req.app.get("db"),
       req.params.project_id,
       projectToUpdate
     )
-      .then(numRowsAffected => {
-        res.status(204).end()
+      .then((numRowsAffected) => {
+        res.status(204).end();
       })
-      .catch(next)
-  })
-
+      .catch(next);
+  });
 
 module.exports = projectsRouter;

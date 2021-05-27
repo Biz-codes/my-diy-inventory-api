@@ -1,6 +1,7 @@
 const ProjectsService = {
     getAllProjects(knex) {
-      return knex.select('*').from('projects')
+      return knex.select('*')
+        .from('projects')
     },
 
     insertProject(knex, newProject) {
