@@ -23,7 +23,7 @@ app.use(helmet())
 app.use(bodyParser.json());
 
 //Load user login router
-app.use("/api/auth", authRouter);
+app.use("/api/auth", authRouter)
 //Load user registration router
 app.use('/api/users', usersRouter)
 app.use('/api/supplies', suppliesRouter)
