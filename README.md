@@ -1,89 +1,93 @@
-# My DIY Inventory 
-Are you DIY-Fabulous?!
-Of course you are!
-What about DIY-Organized?
-...
-When you start a project, do you find yourself scrambling to figure out what supplies you have around before you can get started?
-Do you ever get home from a supply run, only to realize that you overbought one thing but forgot to buy something else?
-Welcome to the virtual filing cabinet you have been needing to keep track of all your DIY supplies, tools and projects!
-Whether you are a DIY Builder, Crafter, Artiste, Gardener, Baker, etcetera, a My DIY Inventory account will lessen your stressin' when organizing your projects,
-freeing up your creative brain to enjoy
-Doin' It Yourself!!!
+# HVC Community Boards 
 
-
+HVC Community Boards is a hub for the HVC community to connect and support each other. Connect with your classmates, your fellow cast members, and the whole HVC community! Find out when your friends will be at events like More Improv More Better! Support members of the community by visiting Marketplace Boards! NEVER MISS A CHANCE FOR MORE JOY & EASE!​
+LET'S MAKE THE HAPPY VALLEY HAPPIER!
 
 ### 1. Working Prototype
-You can access a working prototype of the React app here: https://my-diy-inventory.vercel.app/ and Node app here: https://my-diy-inventory.herokuapp.com/
+You can access a working prototype of the React app here: https://we-friendly.vercel.app/ and Node app here: https://we-friendly.herokuapp.com/
 
 
 
-### 2. User Stories 
-This app is for two types of users: a visitor and a logged-in user
+### 2. User Stories
+This app is for two types of users: community members and teachers.
 
-###### Landing Page
-* as a visitor
-* I want to land on the main page of this application and click buttons,
-* so I can access a demo or go to the sign up page.
+##### Landing Page
+* as a visitor,
+* I want to read about the HVC Community Boards App,
+* so I can decide if I want to sign up
 
-###### Landing Page
-* as a returning user
-* I want to land on the main page of this application and use navigation
-* So I can get to my login.
+##### Landing Page
+* as a community member or teacher,
+* I want to click a link to a signup form
+* so I can sign up for the app
 
-###### Sign Up Page
-* as a visitor
-* I want fill out and submit a form,
-* so I can sign up for an account.
+##### Landing Page
+* as a registered user,
+* I want to log into my account,
+* so I can access the app
 
-###### Login  Page
-* as a returning user
-* I want to enter my username and password,
-* So I can log in to my account.
+##### Signup Page
+* as a community member or teacher
+* I want to sign up for an account
+* so I can join the HVC Community Boards app
 
-###### "My DIY Dashboard" Page
-* as a logged-in user
-* I want to click on icons to visit "My DIY Tools", "My DIY Supplies", or "My DIY Projects",
-* so I can access my stored information on those pages.
+##### Membership Pending Page
+* as a prospective member
+* I want to see a message that the status of my membership is pending
+* so I know my signup form was submitted
 
-###### "My DIY Supplies" Page
-* as a logged-in user
-* I want to manage a list of the supplies I have saved, in alphabetical order, along with descriptions and quantities,
-* so I can manage what supplies I have available for my project.
+##### Report a Problem Page
+* as a community member or teacher
+* I want to report issues to the site administrator
+* so they can monitor and address any concerns with site performance or user conduct
 
-###### "My DIY Tools" Page
-* as a logged-in user
-* I want to manage a list of the tools I have saved, in alphabetical order, along with descriptions and quantities,
-* so I can manage which tools I have available for my project.
+##### Community Hub Page
+* as a community member or teacher
+* I want to view the Community Hub Board
+* so I can connect with the general HVC community
 
-###### "My DIY Projects" Page
-* as a logged-in user
-* I want to manage a list of the projects I have saved, in alphabetical order,
-* so I can click on them to manage project details.
+##### Community Hub Page
+* as a community member or teacher
+* I want to post to the Community Hub Board
+* so I can reach out to the general HVC community
+
+##### Marketplace Page (Bulletin-Board and Directory)
+* as a community member or teacher
+* I want to view the HVC Marketplace Boards
+* so I can look for businesses to support or items to buy
+
+##### Marketplace Page (Bulletin-Board and Directory)
+* as a community member or teacher
+* I want to post to the HVC Marketplace Boards
+* so I can share my business or items with other users
+
+##### New Listing Page
 
 
 
-
-### 3. Functionality 
+### 3. Functionality (TO DO)
 The app's functionality (v1.0) includes:
 * All users can access a demo account to try the app.
 * All users can create an account.
 * All users can click on contact information links for the app creator.
-* Logged-in users can view their saved supplies, tools and projects. a
-* Logged-in users can add, edit and delete inventory items (supplies, tools and projects).
-* Logged-in users can navigate between the Landing page and their Dashboard, Supplies, Tools and Projects pages - using top navigation.
+* Logged-in users can search for reviews by business name, zipcode, state, category and/or identity group. 
+* Logged-in users can search for businesses and services by name, zipcode, state and/or category.
+* Logged-in users can read all reviews, write reviews, and edit and delete the reviews they have written.
+* Logged-in users can view details about, save and add businesses/services, and edit details for businesses they have added.
+* Logged-in users can navigate between the Landing, Reviews and Businesses pages, and their Saved page - using top navigation.
 * Logged-in users can log out to return to the Landing page.
 * All users can use accessibility features such as text-to-speech and navigation via keyboard.
 
 
 
 ### 4. Technology
-* Front-End: HTML5, CSS3, JavaScript ES6, React
-* Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, Postgres
+* Front-End: HTML5, CSS3, JavaScript ES6, Angular, Typescript
+* Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, PostgreSQL
 * Development Environment: Heroku, DBeaver
 
 
 
-### 5. Wireframes
+### 5. Wireframes (TODO)
 Landing Page
 :-------------------------:
 ![Landing Page](/github-images/wireframes/landing-page.jpeg)
@@ -91,78 +95,81 @@ Sign Up Page
 ![Sign Up Page](/github-images/wireframes/sign-up-page.jpg)
 Log In Page
 ![Log In Page](/github-images/wireframes/log-in-page.jpeg)
-"My DIY Dashboard"
-!["My DIY Dashboard"](/github-images/wireframes/dashboard.jpg)
-"My DIY Supplies" & "My DIY Tools"
-!["My DIY Supplies" & "My DIY Tools"](/github-images/wireframes/supplies-tools.jpeg)
-"My DIY Projects" 
-!["My DIY Projects"](/github-images/wireframes/projects.jpg)
-Add Supply & Add Tool
-![Add Supply & Add Tool](/github-images/wireframes/add-supply-tool.jpeg)
-Add Project
-![Add Project](/github-images/wireframes/add-project.jpg)
-Edit Supply & Edit Tool
-![Edit Supply & Edit Tool](/github-images/wireframes/edit-supply-tool.jpeg)
-Edit Project
-![Edit Project](/github-images/wireframes/edit-project.jpg)
+Reviews Page
+![Reviews Page](/github-images/wireframes/reviews.jpg)
+Businesses Page
+!["Businesses Page"](/github-images/wireframes/businesses.jpeg)
+"me-friendly" Page 
+![me-friendly Page](/github-images/wireframes/me-friendly.jpg)
+Add Review
+![Add Review](/github-images/wireframes/add-review.jpg)
+Edit Review
+![Edit Review](/github-images/wireframes/edit-review.jpg)
+Add Business
+![Add Business](/github-images/wireframes/add-business.jpeg)
+Edit Business
+![Edit Business](/github-images/wireframes/edit-business.jpeg)
 
 
 
 
-### 6. Front-end Structure - React Components Map
-* __index.js__ (stateless)
-    * __App.js__ (stateful)
-        * __Landing.js__ (stateless)
-            * __LogIn.js__ (stateful)
-            * __SignUp.js__ (stateful)
-            * __Dashboard.js__ (stateless)
-                * __Nav.js__ (stateless)
-                * __Supplies.js__  (stateful)
-                    * __AddSupply.js__ (stateful)
-                    * __EditSupply.js__ (stateful)
-                * __Tools.js__ (stateful)
-                    * __AddTool.js__ (stateful)
-                    * __EditTool.js__ (stateful)
-                * __Projects.js__ (stateful)
-                    * __AddProject.js__ (stateful))
-                    * __EditProject.js__ (stateful)
+### 6. Front-end Structure - Angular Components Map
+* __index.html__
+    * __app__
+        * __landing__ 
+            * __login__ (to be created)
+            * __problem__
+        * __report__
+        * __signup__
+            * __problem__
+            * __pending__
+        * __hub__
+            * __hub-post__ (to be created)
+            * __new-hub-post__ (to be created)
+            * __problem__
+        * __marketplace__ (to be created)
+            * __bulletin-board__
+                * __bulletin__ (to be created)
+                * __new-bulletin__ (to be created)
+            * __directory__
+                * __listing__ (to be created)
+                * __new-listing__
+            * __problem__
 
 
-
-### 7. Back-end Structure - Business Objects
+### 7. Back-end Structure - Business Objects (TODO)
 * Users (database table)
     * id (auto-generated)
-    * username (email validation)
-    * password (at least 8 chars, at least one alpha and a special character validation)
+    * username (at least 3 characters, validated for uniqueness)
+    * password (at least 8 chars, at least one alpha and one number validation)
     * name (full name, at least 3 chars)
-* Supplies (database table)
+* Businesses (database table)
     * id (auto-generated)
     * user_id (foreign key to users table)
-    * supply_name (varchar255 NOT NULL)
-    * details (text)
-    * quantity (integer NOT NULL default 0)
-* Tools (database table)
+    * adder_id (foreign key to users table)
+    * category (from enum business_type type)
+    * name (at least 3 characters)
+    * address (VARCHAR(255)),
+    * city (VARCHAR(255) NOT NULL)
+    * state (from enum state_district_territory type NOT NULL)
+    * zipcode (5 characters)
+    * website (VARCHAR(255), validated for url)
+* Reviews (database table)
     * id (auto-generated)
-    * user_id (foreign key to users table)
-    * tool_name (varchar255 NOT NULL)
-    * details (text)
-    * quantity (integer NOT NULL default 0)
-* Projects (database table)
-    * id (auto-generated)
-    * user_id (foreign key to users table)
-    * project_name (varchar255 NOT NULL)
-    * tools_needed (text)
-    * supplies_needed (text)
-    * instructions (text)
-    * delivery_date ()
-    * done (varchar255 NOT NULL)
+    * reviewer_id (foreign key to users table)
+    * business_id (foreign key to businesses table)
+    * date_modified (TIMESTAMPTZ NOT NULL DEFAULT now)
+    * friendly_for (from enum identity_group type)
+    * rating (1-5, NOT NULL)
+    * review (VARCHAR(255) NOT NULL)
+
 
     
 
 
 
-### 8. API Documentation
-#### API Overview
+### 8. API Documentation (TODO)
+#### API Overview 
 ```text
     /api
     .
@@ -172,316 +179,388 @@ Edit Project
     ├── /users
     │   └── POST
     │       └── /
-    ├── /supplies
+    ├── /businesses
     |   └── GET
-    |       ├── /:user_id
+    |       ├── /
+    |       ├── /:business_id
+    |       ├── /added-by-me/:adder_id
+    |   └── POST
+    |       ├── /
+    |   └── PATCH
+    |       └── /:business_id
+    ├── /reviews
+    |   └── GET
+    |       ├── /
+    |       ├── /:review_id
+    |       ├── /written-by-me/:reviewer_id
     |   └── POST
     |       ├── /
     |   └── DELETE
-    |       ├── /:supply_id
+    |       ├── /:review_id
     |   └── PATCH
-    |       └── /:supply_id
-    ├── /tools
-    |   └── GET
-    |       ├── /:user_id
-    |   └── POST
-    |       ├── /
-    |   └── DELETE
-    |       ├── /:supply_id
-    |   └── PATCH
-    |       └── /:supply_id
-    ├── projects
-    |   └── GET
-    |       ├── /:user_id
-    |   └── POST
-    |       ├── /
-    |   └── DELETE
-    |       ├── /:supply_id
-    |   └── PATCH
-    |       └── /:supply_id
+    |       └── /:review_id
+    
 ```
 
 ##### POST `/api/auth/login`
 ```js
     // req.body
     {
-        "name": "Demo User",
-        "username": "demo-email@gmail.com",
-        "password": "Fabulous1"
+        "name": "Cowardly Lion",
+        "password": "Friendly1",
+        "username": "KingOfTheForest"
     }
 
     // res.body
     {
         "authToken": String,
-        "userId": 4
+        "userId": 1
     }
 ```
 
-##### POST `/api/users/`
+##### POST `/api/users`
 ```js
     // req.body
     {
-        "name": "Tin Woodsman",
-        "password": "Fabulous1",
-        "username": "no-heart@gmail.com"
+        "name": "Cowardly Lion",
+        "password": "Friendly1",
+        "username": "KingOfTheForest"
     }
-
 
     // res.body
     {
-        "id": 10,
-        "name": "Tin Woodsman",
-        "username": "no-heart@gmail.com"
+        "name": "Cowardly Lion",
+        "password": "Friendly1",
+        "username": "KingOfTheForest"
     }
 ```
 
-##### GET `/api/supplies/:user_id`
+##### GET `/api/businesses`
 ```js
-    // req.query
-        id: 2
 
     // res.body
     [
         {
-            "id": 1,
-            "user_id": 2,
-            "supply_name": "fabric - cotton - jersey knit",
-            "details": "blue, yards",
-            "quantity": 3
+            "id": 8,
+            "adder_id": 1,
+            "category": "restaurant/bar",
+            "name": "Woodstar Cafe",
+            "address": "60 Masonic Street",
+            "city": "Northampton",
+            "state": "MA",
+            "zipcode": "01060",
+            "website": "woodstarcafe.com"
         },
         {
-            "id": 4,
-            "user_id": 2,
-            "supply_name": "thread",
-            "details": "green, spools",
-            "quantity": 1
+            "id": 9,
+            "adder_id": 2,
+            "category": "shopping",
+            "name": "Cedar Chest",
+            "address": "150 Main Street",
+            "city": "Northampton",
+            "state": "MA",
+            "zipcode": "01060",
+            "website": "explorecedarchest.com"
         },
         {
-            "id": 2,
-            "user_id": 2,
-            "supply_name": "nails",
-            "details": "...",
-            "quantity": 50
+            "id": 10,
+            "adder_id": 3,
+            "category": "hotel/accommodations",
+            "name": "The Colonel Williams Inn",
+            "address": "111 Staver Road",
+            "city": "Brattleboro",
+            "state": "VT",
+            "zipcode": "05344",
+            "website": "thecolonelwilliamsinn.com"
+        },
+        {
+            "id": 11,
+            "adder_id": 1,
+            "category": "service",
+            "name": "Home Environmental Services",
+            "address": "4 School Street",
+            "city": "Westfield",
+            "state": "MA",
+            "zipcode": "01085",
+            "website": "homeenvironmentalservices.com"
+        },
+        {
+            "id": 12,
+            "adder_id": 2,
+            "category": "housing/realty",
+            "name": "Mill Valley Estates",
+            "address": "420 Riverglade Drive",
+            "city": "Amherst",
+            "state": "MA",
+            "zipcode": "01002",
+            "website": "millvalleyapts.com"
+        },
+        {
+            "id": 14,
+            "adder_id": 1,
+            "category": "healthcare",
+            "name": "Carroll McGrath APRN",
+            "address": "234 Russell Street, Suite 203",
+            "city": "Hadley",
+            "state": "MA",
+            "zipcode": "01035",
+            "website": "www.psychologytoday.com/us/psychiatrists/carroll-mcgrath-aprn-hadley-ma/174408"
+        },
+        {
+            "id": 16,
+            "adder_id": 1,
+            "category": "restaurant/bar",
+            "name": "Thai Garden",
+            "address": "2 Bridge Street",
+            "city": "Northampton",
+            "state": "MA",
+            "zipcode": "01060",
+            "website": "thaigardennorthampton.com"
+        },
+        {
+            "id": 15,
+            "adder_id": 1,
+            "category": "restaurant/bar",
+            "name": "Thai Garden",
+            "address": "2 Bridge St",
+            "city": "Northampton",
+            "state": "MA",
+            "zipcode": "01060",
+            "website": "thaigardennorthampton.com"
         }
     ]
 ```
 
-##### POST `/api/supplies/`
-```js
-    // req.body
-    {
-        "user_id": 3,
-        "supply_name": "thread",
-        "details": "green, spools",
-        "quantity": 1
-    }
-
-
-    // res.body
-    {
-        "id": 20,
-        "user_id": 3,
-        "supply_name": "thread",
-        "details": "green, spools",
-        "quantity": 1
-    }
-```
-
-##### DELETE `/api/supplies/:supply_id`
+##### GET `/api/businesses/:business_id`
 ```js
     // req.query
-    id: 3
-
-    // res.body
-    
-```
-
-##### PATCH `/api/supplies/:supply_id`
-```js
-    // req.body
-    {
-        "user_id": 2,
-        "supply_id": "dirt",
-        "details": "moo mix",
-        "quantity": 2
-    }
-    // res.body
-
-```
-
-##### GET `/api/tools/:user_id`
-```js
-    // req.query
-        id: 2
-
-    // res.body
-    [
-        {
-            "id": 2,
-            "user_id": 2,
-            "tool_name": "paintbrush",
-            "details": "large",
-            "quantity": 10
-        },
-        {
-            "id": 3,
-            "user_id": 2,
-            "tool_name": "sandpaper",
-            "details": "fine",
-            "quantity": 5
-        },
-        {
-            "id": 1,
-            "user_id": 2,
-            "tool_name": "hammer",
-            "details": "small, blue",
-            "quantity": 2
-        }
-    ]
-```
-
-##### POST `/api/tools/`
-```js
-    // req.body
-    {
-        "user_id": 3,
-        "tool_name": "origami paper",
-        "details": "multicolored sheets",
-        "quantity": 30
-    }
-
+        `/14`
 
     // res.body
     {
         "id": 14,
-        "user_id": 3,
-        "tool_name": "origami paper",
-        "details": "multicolored sheets",
-        "quantity": 30
+        "adder_id": 1,
+        "category": "healthcare",
+        "name": "Carroll McGrath APRN",
+        "address": "234 Russell Street, Suite 203",
+        "city": "Hadley",
+        "state": "MA",
+        "zipcode": "01035",
+        "website": "www.psychologytoday.com/us/psychiatrists/carroll-mcgrath-aprn-hadley-ma/174408"
     }
 ```
 
-##### DELETE `/api/tools/:tool_id`
+##### GET `/api/businesses/added-by-me/:adder_id`
 ```js
     // req.query
-    id: 5
-
-    // res.body
-    
-```
-
-##### PATCH `/api/tools/:tool_id`
-```js
-    // req.body
-    {
-        "user_id": 2,
-        "tool_name": "hammer",
-        "details": "small, blue",
-        "quantity": 3
-    }
-    // res.body
-
-```
-
-##### GET `/api/projects/:user_id`
-```js
-    // req.query
-        id: 2
+        `/2`
 
     // res.body
     [
         {
-            "id": 3,
-            "user_id": 3,
-            "project_name": "Raised Bed Garden",
-            "supplies_needed": "wood, screws, chicken wire",
-            "tools_needed": "drill, wire cutters",
-            "instructions": "1. Cut the boards, 2. Screw them together. 3. put dirt in.",
-            "delivery_date": "2021-05-02T00:00:00.000Z",
-            "done": "DONE it myself!"
+            "id": 9,
+            "adder_id": 2,
+            "category": "shopping",
+            "name": "Cedar Chest",
+            "address": "150 Main Street",
+            "city": "Northampton",
+            "state": "MA",
+            "zipcode": "01060",
+            "website": "explorecedarchest.com"
         },
         {
-            "id": 5,
-            "user_id": 3,
-            "project_name": "Stormy Pants",
-            "supplies_needed": "blue thread, jersey knit cotton, pattern",
-            "tools_needed": "marking pen, pins, scissors, sewing machine, sewing machine needle",
-            "instructions": "cut the pattern and sew",
-            "delivery_date": "2021-09-30T00:00:00.000Z",
-            "done": "to-do myself"
-        },
-        {
-            "id": 1,
-            "user_id": 3,
-            "project_name": "Beehive shelves",
-            "supplies_needed": "wood, screws",
-            "tools_needed": "saw, ruler",
-            "instructions": "Cut, screw and build",
-            "delivery_date": "2021-05-14T00:00:00.000Z",
-            "done": "doin' it myself"
-        },
-        {
-            "id": 2,
-            "user_id": 3,
-            "project_name": "Herb garden",
-            "supplies_needed": "seeds, dirt",
-            "tools_needed": "shovel, trowel",
-            "instructions": "plant",
-            "delivery_date": "2021-05-15T00:00:00.000Z",
-            "done": "DONE it myself!"
+            "id": 12,
+            "adder_id": 2,
+            "category": "housing/realty",
+            "name": "Mill Valley Estates",
+            "address": "420 Riverglade Drive",
+            "city": "Amherst",
+            "state": "MA",
+            "zipcode": "01002",
+            "website": "millvalleyapts.com"
         }
     ]
 ```
 
-##### POST `/api/projects/`
+##### POST `/api/businesses/`
 ```js
     // req.body
     {
-        "user_id": 4,
-        "project_name": "Stormy Pants",
-        "supplies_needed": "blue thread, jersey knit cotton, pattern",
-        "tools_needed": "marking pen, pins, scissors, sewing machine, sewing machine needle",
-        "instructions": "...",
-        "delivery_date": "2021-09-30T04:00:00.000Z",
-        "done": "to-do myself"
+        "adder_id": 3,
+        "category": "restaurant/bar",
+        "name": "Whetstone Station",
+        "address": "36 Bridge St",
+        "city": "Brattleboro",
+        "state": "VT",
+        "zipcode": "05301",
+        "website": "whetstonestation.com"
     }
-
 
     // res.body
     {
-        "id": 10,
-        "user_id": 4,
-        "project_name": "Stormy Pants",
-        "supplies_needed": "blue thread, jersey knit cotton, pattern",
-        "tools_needed": "marking pen, pins, scissors, sewing machine, sewing machine needle",
-        "instructions": "...",
-        "delivery_date": "2021-09-30T04:00:00.000Z",
-        "done": "to-do myself"
+        "id": 17,
+        "adder_id": 3,
+        "category": "restaurant/bar",
+        "name": "Whetstone Station",
+        "address": "36 Bridge St",
+        "city": "Brattleboro",
+        "state": "VT",
+        "zipcode": "05301",
+        "website": "whetstonestation.com"
     }
 ```
 
-##### DELETE `/api/project/:project_id`
+##### PATCH `/api/businesses/:business_id`
+```js
+    // req.body
+    {
+        "adder_id": 3,
+        "category": "restaurant/bar",
+        "name": "Whetstone Station",
+        "address": "36 Bridge Street",
+        "city": "Brattleboro",
+        "state": "VT",
+        "zipcode": "05301",
+        "website": "whetstonestation.com"
+    }
+
+    // res.body
+
+```
+
+##### GET `/api/reviews`
 ```js
     // req.query
-    id: 3
+        
+    // res.body
+    [
+        {
+            "id": 1,
+            "reviewer_id": 1,
+            "business_id": 8,
+            "date_modified": "2021-09-30T04:00:00.000Z",
+            "friendly_for": "LGBTQIA+",
+            "rating": 5,
+            "review": "Very queer friendly! And great coffee too"
+        },
+        {
+            "id": 2,
+            "reviewer_id": 2,
+            "business_id": 8,
+            "date_modified": "2021-09-30T04:00:00.000Z",
+            "friendly_for": "LGBTQIA+",
+            "rating": 5,
+            "review": "I felt totally welcomed. Northampton rocks!"
+        },
+        {
+            "id": 3,
+            "reviewer_id": 3,
+            "business_id": 9,
+            "date_modified": "2021-09-30T04:00:00.000Z",
+            "friendly_for": "Disabled persons",
+            "rating": 3,
+            "review": "I had to go out into Thornes to take the elevator to the second floor, and some of the displays were close together, but the staff were helpful!"
+        },
+        {
+            "id": 5,
+            "reviewer_id": 2,
+            "business_id": 9,
+            "date_modified": "2021-10-30T04:00:00.000Z",
+            "friendly_for": "Women",
+            "rating": 5,
+            "review": "Fun store! I mostly only saw women in there!"
+        }
+    ]
+```
+
+##### GET `/api/reviews/:review_id`
+```js
+    // req.query
+        `/2`
+    // res.body
+    {
+        "id": 2,
+        "reviewer_id": 2,
+        "business_id": 8,
+        "date_modified": "2021-09-30T04:00:00.000Z",
+        "friendly_for": "LGBTQIA+",
+        "rating": 5,
+        "review": "I felt totally welcomed. Northampton rocks!"
+    }
+```
+
+##### GET `/api/reviews/written-by-me/:reviewer_id`
+```js
+    // req.query
+        `/3`
+    // res.body
+    [
+        {
+            "id": 3,
+            "reviewer_id": 3,
+            "business_id": 9,
+            "date_modified": "2021-09-30T04:00:00.000Z",
+            "friendly_for": "Disabled persons",
+            "rating": 3,
+            "review": "I had to go out into Thornes to take the elevator to the second floor, and some of the displays were close together, but the staff were helpful!"
+        }
+    ]
+```
+
+##### POST `/api/reviews/`
+```js
+    // req.body
+    {
+        "reviewer_id": 2,
+        "business_id": 17,
+        "date_modified": "2021-09-30T04:00:00.000Z",
+        "friendly_for": "LGBTQIA+",
+        "rating": 5,
+        "review": "Beautiful looking over the river. I snuggled up with my partner and the server commented on how cute we looked."
+    }
+
+    // res.body
+    {
+        "id": 6,
+        "reviewer_id": 2,
+        "business_id": 17,
+        "date_modified": "2021-09-30T04:00:00.000Z",
+        "friendly_for": "LGBTQIA+",
+        "rating": 5,
+        "review": "Beautiful looking over the river. I snuggled up with my partner and the server commented on how cute we looked."
+    }
+```
+
+##### DELETE `/api/reviews/:review_id`
+```js
+    // req.query
+    `/4`
 
     // res.body
     
 ```
 
-##### PATCH `/api/projects/:project_id`
+##### PATCH `/api/reviews/:review_id`
 ```js
     // req.body
     {
-        "user_id": 3,
-        "project_name": "Herb garden",
-        "supplies_needed": "seeds, dirt",
-        "tools_needed": "shovel, trowel",
-        "instructions": "plant",
-        "delivery_date": "2021-06-15T00:00:00.000Z",
-        "done": "DONE it myself"
+        "reviewer_id": 2,
+        "business_id": 9,
+        "date_modified": "2021-10-30T04:00:00.000Z",
+        "friendly_for": "Women",
+        "rating": 5,
+        "review": "Great place to buy gifts! I mostly only saw women in there!"
     }
     // res.body
+    {
+        "id": 5,
+        "reviewer_id": 2,
+        "business_id": 9,
+        "date_modified": "2021-10-30T04:00:00.000Z",
+        "friendly_for": "Women",
+        "rating": 5,
+        "review": "Great place to buy gifts! I mostly only saw women in there!"
+    }
 
 ```
 
@@ -489,7 +568,8 @@ Edit Project
 
 
 
-### 9. Screenshots
+
+### 9. Screenshots (TODO)
 Landing Page
 :-------------------------:
 ![Landing Page](/github-images/screenshots/landing-page.png)
@@ -497,50 +577,108 @@ Sign Up Page
 ![Sign Up Page](/github-images/screenshots/sign-up-page.png)
 Log In Page
 ![Log In Page](/github-images/screenshots/log-in-page.png)
-"My DIY Dashboard"
-!["My DIY Dashboard"](/github-images/screenshots/dashboard.png)
-"My DIY Supplies"
-!["My DIY Supplies"](/github-images/screenshots/supplies.png)
-Add Supply
-![Add Supply](/github-images/screenshots/add-supply.png)
-Edit Supply
-![Edit Supply](/github-images/screenshots/edit-supply.png)
-"My DIY Tools"
-!["My DIY Tools"](/github-images/screenshots/tools.png)
-Add Tool
-![Add Tool](/github-images/screenshots/add-tool.png)
-Edit Tool
-![Edit Tool](/github-images/screenshots/edit-tool.png)
-"My DIY Projects"
-!["My DIY Projects"](/github-images/screenshots/projects.png)
-Add Project
-![Add Project](/github-images/screenshots/add-project.png)
-Edit Project
-![Edit Project](/github-images/screenshots/edit-project.png)
+Reviews
+!["Reviews Page"](/github-images/screenshots/reviews.png)
+Businesses
+!["Businesses Page"](/github-images/screenshots/businesses.png)
+"me-friendly"
+!["me-friendly"](/github-images/screenshots/me-friendly.png)
+Add Business
+![Add Business](/github-images/screenshots/add-business.png)
+Add Review
+![Add Review](/github-images/screenshots/add-review.png)
+Edit Business
+![Edit Business](/github-images/screenshots/edit-business.png)
+Edit Review
+![Edit Review](/github-images/screenshots/edit-review.png)
+
 
 
 
 ### 10. Development Roadmap
-This is v2.0 of the app, but future enhancements are expected to include:
-* add functionality to allow users to create a shopping list for items they are missing for a project
-* add functionality for users to retrieve forgotten log in information
-* add functionality for users to upload pictures of their projects
-* add icons and/or images for common inventory items
-* add databases shared among users to add tools, supplies and projects that other users have added
+This is v1.0 of the app, but future enhancements are expected to include the following user stories:
+* as a teacher
+* I want to delete any post or comment that does not adhere to community norms
+* so everyone feels safe
+
+* as a community member or teacher
+* I want to view other users' profiles
+* so I can find out more about them
+
+* as a community member or teacher
+* I want to edit or delete my own posts
+* so I can fix, update, or remove them
+
+* as a community member or teacher
+* I want to comment on other users' posts
+* so I can have conversations with other users
+
+* as a community member or teacher
+* I want to send private messages to other users
+* so I can connect privately about posts I see on various Boards
+
+* as a community member or teacher
+* I want to view and respond to my private messages
+* so I can connect privately with other users
+
+* as a community member
+* I want to join Boards for classes and casts
+* so I can connect about topics related to those specific groups
+
+* as a community member or teacher
+* I want to view, post and comment on Boards for classes and casts
+* so I can converse with my class/castmates
+
+* as a teacher
+* I want to invite members to join classes and casts I run
+* so I can get all my students connected to group Boards
+
+* as a teacher
+* I want to set up a profile for my class or cast
+* so members feel welcome, and because it's fun!
+
+* as a teacher
+* I want to approve or reject user requests to join my class or cast
+* so that users are only joining their relevant groups
+
+* as a community member
+* I want to create a simple profile
+* so other users know who I am
 
 
-
-
-### 11. How to run it
+### 11. How to run it 
 Use command line to navigate into the project folder and run the following in terminal
 
-##### Local React scripts
-* To install the react project ===> npm install
-* To run react (on port 3000) ===> npm start
-* To run tests ===> npm run test
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
-##### Local Node scripts
+#### Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+#### Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+#### Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+#### Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+#### Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+#### Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+##### Local Node scripts 
 * To install the node project ===> npm install
 * To migrate the database ===> npm run migrate -- 1
 * To run Node server (on port 8000) ===> npm run dev
 * To run tests ===> npm run test
+
